@@ -1,41 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { Input, Button, Alert } from "@smooth-ui/core-sc";
+import { Alert } from "@smooth-ui/core-sc";
 
-// Style
-const StyledForm = styled.form`
-   display: flex;
-   flex-direction: column;
-
-   width: 650px;
-   padding: 20px 50px;
-
-   margin: 0 auto;
-
-   border: 1px solid grey;
-   border-radius: 15px;
-`;
-
-const StyledInput = styled(Input)`
-   width: 100%;
-`;
-
-const FormInput = styled.div`
-   margin: 10px 0;
-`;
-
-const AccountButtons = styled.div`
-   width: 100%;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-`;
-const StyledButton = styled(Button)`
-   width: 100%;
-   margin: 15px 0;
-`;
+import {
+   Form,
+   Input,
+   InputDiv,
+   ButtonBox,
+   FormButton
+} from "../../styles/Forms";
 
 //Yup form validation
 const FormSchema = yup.object().shape({
@@ -55,11 +29,11 @@ const RegisterForm = props => {
    };
 
    return (
-      <StyledForm onSubmit={handleSubmit(onRegisterSubmit)}>
+      <Form onSubmit={handleSubmit(onRegisterSubmit)}>
          <h2>Register</h2>
 
-         <FormInput>
-            <StyledInput
+         <InputDiv>
+            <Input
                placeholder="Email"
                type="email"
                name="email"
@@ -68,10 +42,10 @@ const RegisterForm = props => {
             {errors.email && (
                <Alert variant="danger">{errors.email.message}</Alert>
             )}
-         </FormInput>
+         </InputDiv>
 
-         <FormInput>
-            <StyledInput
+         <InputDiv>
+            <Input
                placeholder="Password"
                type="password"
                name="password"
@@ -80,12 +54,12 @@ const RegisterForm = props => {
             {errors.password && (
                <Alert variant="danger">{errors.password.message}</Alert>
             )}
-         </FormInput>
+         </InputDiv>
 
-         <AccountButtons>
-            <StyledButton type="submit">Register</StyledButton>
-         </AccountButtons>
-      </StyledForm>
+         <ButtonBox>
+            <FormButton type="submit">Register</FormButton>
+         </ButtonBox>
+      </Form>
    );
 };
 
