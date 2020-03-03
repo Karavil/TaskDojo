@@ -38,7 +38,7 @@ const RegisterForm = props => {
 			})
 			.then(res => {
 				console.log(res.data);
-				history.push('/profile');
+				history.push('/login');
 			})
 			.catch(err => {
 				console.log('Registration Error:', err.response);
@@ -47,7 +47,7 @@ const RegisterForm = props => {
 
 	// routerHistory
 	const history = useHistory();
-	// baseURL
+	// baseUrl
 	const baseUrl = 'https://wunderlist7.herokuapp.com/api';
 
 	return (
