@@ -1,10 +1,11 @@
 import React from "react";
 import TasksList from "./TasksList";
+import DateButtons from "./DateButtons";
 
 const dummyTasks = [
    {
       completed: false,
-      taskName: "Do Homework",
+      taskName: "Go to work and do this yadadada, after that do this",
       taskExtra: "English & Math class",
       tags: [
          {
@@ -55,8 +56,14 @@ const dummyTasks = [
       ]
    }
 ];
+
 const Tasks = () => {
-   return <TasksList tasks={dummyTasks} />;
+   return (
+      <>
+         <DateButtons />
+         <TasksList tasks={dummyTasks} />
+      </>
+   );
 };
 
 export default Tasks;

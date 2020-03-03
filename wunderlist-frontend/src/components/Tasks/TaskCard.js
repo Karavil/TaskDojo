@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button } from "@smooth-ui/core-sc";
+import { Button, Separator } from "@smooth-ui/core-sc";
 
 const StyledTaskCard = styled.div`
    display: flex;
@@ -8,11 +8,23 @@ const StyledTaskCard = styled.div`
    justify-content: space-between;
    align-items: center;
 
-   padding: 5px 20px;
+   padding: 8px 20px;
    margin: 20px 0;
 
-   border-radius: 10px;
+   border-radius: 3px;
+   border: 2px solid;
+   border-color: ${({ theme }) => theme.colors.secondary};
+
    background: white;
+
+   h3,
+   p {
+      margin: 5px 0;
+   }
+
+   p {
+      color: ${({ theme }) => theme.colors.info};
+   }
 `;
 
 const TaskInfo = styled.div`

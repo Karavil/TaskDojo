@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
    h1,h2,h3,h4,h5,h6{
       font-family: 'Montserrat', sans-serif;
+      color: ${({ theme }) => theme.colors.primary}
    }
 
    body {
@@ -30,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
 const UIColors = {
    antarcticBlue: "#2c3d63",
    brookGreen: "#aadcca",
+   darkerGreen: "#97c4b4",
    babyPowder: "#f7f8f3",
    grapefruitPulp: "#ff6f5e",
    oliveish: "#6c887e"
@@ -40,9 +42,11 @@ const theme = {
    colors: {
       primary: UIColors.antarcticBlue,
       secondary: UIColors.brookGreen,
+      secondaryDark: UIColors.darkerGreen,
+      info: "gray",
       light: UIColors.babyPowder,
       warning: UIColors.grapefruitPulp,
-      container: "gainsboro"
+      mainGrey: "gainsboro"
    },
 
    fonts: {

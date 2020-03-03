@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 import TaskCard from "./TaskCard";
+import Controls from "./Controls";
 
-const NotesContainer = styled.div`
+const TasksContainer = styled.div`
    margin: 0 auto;
-   padding: 2%;
+   padding: 20px 30px;
 
-   width: 80%;
+   width: 60%;
    border-radius: 3px;
 
-   background: ${({ theme }) => theme.colors.container};
+   background: ${({ theme }) => theme.colors.mainGrey};
 `;
 
 const TasksList = ({ tasks }) => {
@@ -18,7 +19,12 @@ const TasksList = ({ tasks }) => {
       return <TaskCard task={task} />;
    });
 
-   return <NotesContainer>{Tasks}</NotesContainer>;
+   return (
+      <TasksContainer>
+         <Controls />
+         {Tasks}
+      </TasksContainer>
+   );
 };
 
 export default TasksList;
