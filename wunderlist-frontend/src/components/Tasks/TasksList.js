@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Switch, Route } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import TaskCard from "./TaskCard";
 import Controls from "./Controls";
+import TaskCard from "./TaskCard";
 
 const TasksContainer = styled.div`
    margin: 0 auto;
@@ -18,30 +18,26 @@ const TasksContainer = styled.div`
 `;
 
 const TasksList = ({ tasks }) => {
+   const { dayCount } = useParams();
+   console.log(useParams());
+   const [title, setTitle] = useState(`Next ${dayCount} days`);
+
+   useEffect(() => {
+      if (dayCount === "1") {
+         setTitle("Today's Tasks");
+      } else {
+         setTitle(`Next ${dayCount} days`);
+      }
+   }, [dayCount]);
+
    const Tasks = tasks.map(task => {
       return <TaskCard key={task.creationTime} task={task} />;
    });
 
    return (
       <TasksContainer>
-         <Switch>
-            <Route path="/tasks/today">
-               <Controls title="Today" />
-               {Tasks}
-            </Route>
-            <Route path="/tasks/week">
-               <Controls title="This Week" />
-               {Tasks}
-            </Route>
-            <Route path="/tasks/month">
-               <Controls title="This Month" />
-               {Tasks}
-            </Route>
-            <Route path="/tasks">
-               <Controls title="All Tasks" />
-               {Tasks}
-            </Route>
-         </Switch>
+         <Controls title={title} />
+         {Tasks}
       </TasksContainer>
    );
 };

@@ -52,19 +52,7 @@ const GenreTag = styled(Button)`
    margin: 0 5px;
 `;
 
-const DueDate = styled.h3`
-   letter-spacing: 0.1rem;
-   padding: 0 10px;
-`;
-
-// needs unique keys
-
 const TaskCard = ({ task }) => {
-   let dueDate = null;
-   if (task.dueEpoch) {
-      dueDate = new Date(task.dueEpoch);
-   }
-
    const Tags = task.tags.map((tag, index) => {
       return (
          <GenreTag key={index} outline variant={tag.color}>
@@ -81,16 +69,6 @@ const TaskCard = ({ task }) => {
                <h3>{task.taskName}</h3>
                <p>{task.taskExtra}</p>
             </TaskInfo>
-
-            {dueDate && (
-               <>
-                  <h3>Due:</h3>
-                  <DueDate>
-                     {dueDate.getMonth()}/{dueDate.getDay()}/
-                     {dueDate.getFullYear()}
-                  </DueDate>
-               </>
-            )}
          </Left>
          <Right>{Tags}</Right>
       </StyledTaskCard>

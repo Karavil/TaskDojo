@@ -1,4 +1,6 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
+
 import TasksList from "./TasksList";
 import DateButtons from "./DateButtons";
 
@@ -63,11 +65,17 @@ const dummyTasks = [
    }
 ];
 
+const filterByTimeRange = () => {};
+
 const Tasks = () => {
    return (
       <>
          <DateButtons />
-         <TasksList tasks={dummyTasks} />
+         <Switch>
+            <Route path="/tasks/days/:dayCount">
+               <TasksList tasks={dummyTasks} />
+            </Route>
+         </Switch>
       </>
    );
 };
