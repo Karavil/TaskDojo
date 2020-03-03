@@ -32,9 +32,9 @@ const DateRangeButton = styled(Button)`
    border: ${({ theme }) => `3px solid ${theme.colors.secondary}`};
 
    border-left: ${props =>
-      props.middle ? `2px solid ${props.theme.colors.secondary}` : {}};
+      props.middle ? `1px solid ${props.theme.colors.secondary}` : {}};
    border-right: ${props =>
-      props.middle ? `2px solid ${props.theme.colors.secondary}` : {}};
+      props.middle ? `1px solid ${props.theme.colors.secondary}` : {}};
 `;
 
 const ViewAllButton = styled(DateRangeButton)`
