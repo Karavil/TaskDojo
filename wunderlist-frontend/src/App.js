@@ -1,5 +1,6 @@
 import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { Normalize } from "@smooth-ui/core-sc";
 import { Switch, Route } from "react-router-dom";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import { Profile } from "./components/Profile/Profile";
@@ -60,18 +61,19 @@ const theme = {
 function App() {
    return (
       <ThemeProvider theme={theme}>
+         <Normalize />
          <GlobalStyle />
 
          <Switch>
-            <Route exact path="/" component={Login} />
+            <PrivateRoute path="/tasks" component={Tasks} />
+            <PrivateRoute path="/profile" component={Profile} />
             <Route path="/login">
                <Login />
             </Route>
             <Route path="/register">
                <Register />
             </Route>
-            <PrivateRoute path="/tasks" component={Tasks} />
-            <PrivateRoute path="/profile" component={Profile} />
+            <Route path="/" component={Login} />
          </Switch>
       </ThemeProvider>
    );
