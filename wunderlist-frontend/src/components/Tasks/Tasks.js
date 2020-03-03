@@ -111,7 +111,7 @@ const Tasks = () => {
             <Route path="/tasks/days/:dayCount">
                <TimeFilteredTasks tasks={dummyTasks} />
             </Route>
-            <Route path="/tasks">
+            <Route path="/">
                <AllTasks tasks={dummyTasks} />
             </Route>
          </Switch>

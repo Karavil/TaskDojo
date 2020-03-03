@@ -11,7 +11,7 @@ import Register from "./components/Register/Register";
 import Tasks from "./components/Tasks/Tasks";
 
 import NavBar from "./components/Navbar/Navbar";
-import { TestUser } from './components/TestUser/TestUser'
+import { TestUser } from "./components/TestUser/TestUser";
 
 /* Please do not use @import CSS syntax in createGlobalStyle at this time, as the CSSOM APIs we use in production do not handle it well. Instead, we recommend using a library such as react-helmet to inject a typical <link> meta tag to the stylesheet, or simply embedding it manually in your index.html <head> section for a simpler app. */
 
@@ -92,9 +92,9 @@ function App() {
                <Route path="/register">
                   <Register />
                </Route>
-                <Route path="/testUser" component={TestUser} />
-               
-              <Route path="/" component={Login} />
+               <Route path="/testUser" component={TestUser} />
+
+               <PrivateRoute path="/" component={Tasks} />
             </Switch>
          </AppContainer>
       </ThemeProvider>
