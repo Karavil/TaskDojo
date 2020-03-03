@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 import { FaUserCircle } from "react-icons/fa";
-import { Text, Button } from "@smooth-ui/core-sc";
 
 // Main divs
 const StyledNav = styled.nav`
@@ -31,7 +30,7 @@ const NavContainer = styled.div`
    justify-content: space-between;
    align-items: center;
 
-   height: 70px;
+   height: 65px;
 `;
 
 // Logo (on left)
@@ -44,14 +43,15 @@ const LogoLink = styled(NavLink)`
    text-decoration: none;
    color: black;
 
+   letter-spacing: 0.05rem;
+   font-size: 1.1rem;
+
    * {
       margin: 0;
    }
 
-   img {
-      height: 35px;
-      border-radius: 10px;
-      margin-right: 15px;
+   span {
+      color: ${({ theme }) => theme.colors.secondaryDark};
    }
 `;
 
@@ -90,6 +90,11 @@ const UserProfile = styled.div`
 
 const ProfileIcon = styled(FaUserCircle)`
    font-size: 2rem;
+   color: ${({ theme }) => theme.colors.primary};
+
+   &:hover {
+      cursor: pointer;
+   }
 `;
 
 const NavBar = () => {
@@ -97,11 +102,9 @@ const NavBar = () => {
       <StyledNav>
          <NavContainer>
             <LogoLink to="/">
-               <img
-                  src="https://gamepedia.cursecdn.com/dota2_gamepedia/6/63/Toughness_Aura_%28Wildwing_Ripper%29_icon.png?version=aeb6df14ec9790ad0a5f6930603c578b"
-                  alt="logo"
-               />
-               <Text variant="h3">Wundernote7</Text>
+               <h2>
+                  Wundernote<span>7</span>
+               </h2>
             </LogoLink>
             <UserProfile>
                <ProfileIcon />
