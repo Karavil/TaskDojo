@@ -8,9 +8,9 @@ const dummyTasks = [
    {
       completed: false,
       creationTime: Date.now(),
-      taskName:
+      name:
          "This is a task without a due date. Always appears in 'Today's Tasks'",
-      taskExtra: "Dummy task",
+      description: "Dummy task",
       tags: [
          {
             genre: "School",
@@ -21,8 +21,8 @@ const dummyTasks = [
    {
       completed: false,
       creationTime: Date.now(),
-      taskName: "This is a task for sometime today.",
-      taskExtra: "Dummy task",
+      name: "This is a task for sometime today.",
+      description: "Dummy task",
       due: Date.now() + 82400000,
       tags: [
          {
@@ -34,8 +34,8 @@ const dummyTasks = [
    {
       completed: false,
       creationTime: Date.now(),
-      taskName: "This is for sometime this week (5 days out).",
-      taskExtra: "Dummy task",
+      name: "This is for sometime this week (5 days out).",
+      description: "Dummy task",
       due: Date.now() + 86400000 * 5,
       tags: [
          {
@@ -55,8 +55,8 @@ const dummyTasks = [
    {
       completed: false,
       creationTime: Date.now(),
-      taskName: "This is a task for 3 weeks out.",
-      taskExtra: "Dummy task",
+      name: "This is a task for 3 weeks out.",
+      description: "Dummy task",
       due: Date.now() + 86400000 * 21,
       tags: [
          {
@@ -76,9 +76,9 @@ const dummyTasks = [
    {
       completed: false,
       creationTime: Date.now(),
-      taskName:
+      name:
          "This is a task for 2 months out. Should only be listed in View All tab.",
-      taskExtra: "Dummy task",
+      description: "Dummy task",
       due: Date.now() + 86400000 * 60,
       tags: [
          {
@@ -105,7 +105,7 @@ const Tasks = () => {
             <Route path="/tasks/days/:dayCount">
                <TimeFilteredTasks tasks={dummyTasks} />
             </Route>
-            <Route path="/tasks/all">
+            <Route path="/tasks">
                <AllTasks tasks={dummyTasks} />
             </Route>
          </Switch>

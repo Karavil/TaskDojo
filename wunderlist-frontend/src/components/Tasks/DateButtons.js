@@ -74,7 +74,7 @@ const DateButtons = props => {
                </DateRangeButton>
             </NavLink>
          </ButtonGroup>
-         <NavLink to="/tasks/all">
+         <NavLink to="/tasks">
             <ViewAllButton variant="secondaryDark" scale="lg">
                View All
             </ViewAllButton>

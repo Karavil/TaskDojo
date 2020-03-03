@@ -66,8 +66,8 @@ const TaskCard = ({ task }) => {
          <Left>
             <input type="checkbox" value={task.complete} />
             <TaskInfo>
-               <h3>{task.taskName}</h3>
-               <p>{task.taskExtra}</p>
+               <h3>{task.name}</h3>
+               <p>{task.description}</p>
             </TaskInfo>
          </Left>
          <Right>{Tags}</Right>

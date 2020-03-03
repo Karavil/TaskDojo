@@ -93,7 +93,7 @@ export const AllTasks = ({ tasks }) => {
       <TasksContainer>
          <Controls title={"Today's Tasks"} />
          {TasksToday}
-         <Controls title={"Other Tasks"} />
+         <Controls title={"After Today"} />
          {OtherTasks}
       </TasksContainer>
    );
