@@ -14,6 +14,8 @@ const TasksContainer = styled.div`
    margin: 0 auto;
    padding: 20px 30px;
 
+   width: 1200px;
+
    border-radius: 3px;
 
    box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
@@ -71,8 +73,6 @@ export const TimeFilteredTasks = ({ tasks }) => {
 };
 
 export const AllTasks = ({ tasks }) => {
-   const { dayCount } = useParams();
-
    const TasksToday = filterTasks(tasks, 0, Date.now() + ONE_DAY_MS).map(
       task => {
          return <TaskCard key={task.creationTime} task={task} />;
