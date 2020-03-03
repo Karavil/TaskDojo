@@ -15,7 +15,8 @@ const ButtonGroup = styled.div`
 
 const DateRangeButton = styled(Button)`
    font-weight: 600;
-   padding: 0.6rem 3rem;
+   padding: 0.6rem 1rem;
+   width: 200px;
    color: white;
    background-color: ${props =>
       props.active ? props.theme.colors.secondaryDark : {}};
@@ -38,6 +39,7 @@ const DateRangeButton = styled(Button)`
 
 const ViewAllButton = styled(DateRangeButton)`
    padding: 0.1rem 8rem 0.3rem;
+   width: auto;
 
    border-top: none;
    border-color: ${({ theme }) => theme.colors.secondary};
@@ -54,21 +56,21 @@ const ViewAllButton = styled(DateRangeButton)`
 
 const DateButtons = props => {
    return (
-      <ButtonGroup margin="10px auto" flexDirection="column">
+      <ButtonGroup margin="0 0 30px" flexDirection="column">
          <ButtonGroup flexDirection="row">
-            <NavLink to="/tasks/today">
+            <NavLink to="/tasks/days/1">
                <DateRangeButton left variant="primary" scale="lg">
                   Today
                </DateRangeButton>
             </NavLink>
-            <NavLink to="/tasks/week">
+            <NavLink to="/tasks/days/7">
                <DateRangeButton middle variant="primary" scale="lg">
-                  This Week
+                  Next 7 Days
                </DateRangeButton>
             </NavLink>
-            <NavLink to="/tasks/month">
+            <NavLink to="/tasks/days/30">
                <DateRangeButton right variant="primary" scale="lg">
-                  This Month
+                  Next 30 Days
                </DateRangeButton>
             </NavLink>
          </ButtonGroup>

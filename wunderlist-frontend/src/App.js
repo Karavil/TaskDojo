@@ -1,12 +1,16 @@
 import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "@smooth-ui/core-sc";
 import { Switch, Route } from "react-router-dom";
+
 import { PrivateRoute } from "./utils/PrivateRoute";
+
 import { Profile } from "./components/Profile/Profile";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Tasks from "./components/Tasks/Tasks";
+
+import NavBar from "./components/Navbar/Navbar";
 import { TestUser } from './components/TestUser/TestUser'
 
 /* Please do not use @import CSS syntax in createGlobalStyle at this time, as the CSSOM APIs we use in production do not handle it well. Instead, we recommend using a library such as react-helmet to inject a typical <link> meta tag to the stylesheet, or simply embedding it manually in your index.html <head> section for a simpler app. */
@@ -25,10 +29,22 @@ const GlobalStyle = createGlobalStyle`
    }
 
    body {
+      padding: 0;
       margin: 0;
       font-family: 'Open Sans', sans-serif;
       background: white;
+      height: 100vh;
    }
+`;
+
+const AppContainer = styled.div`
+   background: white;
+   height: 100vh;
+
+   padding-top: 100px;
+
+   display: flex;
+   justify-content: center;
 `;
 
 // UI Theme
@@ -65,19 +81,22 @@ function App() {
          <Normalize />
          <GlobalStyle />
 
-         <Switch>
-            <PrivateRoute path="/tasks" component={Tasks} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <Route path="/login">
-               <Login />
-            </Route>
-            <Route path="/register">
-               <Register />
-            </Route>
-            <Route path="/testUser" component={TestUser} />
-            <Route path="/" component={Login} />
-
-         </Switch>
+         <AppContainer>
+            <NavBar />
+            <Switch>
+               <PrivateRoute path="/tasks" component={Tasks} />
+               <PrivateRoute path="/profile" component={Profile} />
+               <Route path="/login">
+                  <Login />
+               </Route>
+               <Route path="/register">
+                  <Register />
+               </Route>
+                <Route path="/testUser" component={TestUser} />
+               
+              <Route path="/" component={Login} />
+            </Switch>
+         </AppContainer>
       </ThemeProvider>
    );
 }

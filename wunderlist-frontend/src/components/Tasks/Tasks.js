@@ -1,38 +1,17 @@
 import React from "react";
-import TasksList from "./TasksList";
+import { Route, Switch } from "react-router-dom";
+import styled from "styled-components";
+
+import { TimeFilteredTasks, AllTasks } from "./TasksList";
 import DateButtons from "./DateButtons";
 
 const dummyTasks = [
    {
       completed: false,
-      creationTime: Date.now() - 2,
-      taskName: "Go to work and do this yadadada, after that do this",
-      taskExtra: "English & Math class",
-      tags: [
-         {
-            genre: "School",
-            color: "Red"
-         }
-      ]
-   },
-   {
-      completed: false,
-      creationTime: Date.now() + 10,
-      taskName: "Do Homework",
-      dueEpoch: Date.now(),
-      taskExtra: "English & Math class",
-      tags: [
-         {
-            genre: "School",
-            color: "Red"
-         }
-      ]
-   },
-   {
-      completed: false,
-      creationTime: Date.now() - 1,
-      taskName: "Do Homework",
-      taskExtra: "English & Math class",
+      creationTime: Date.now(),
+      name:
+         "This is a task without a due date. Always appears in 'Today's Tasks'",
+      description: "Dummy task",
       tags: [
          {
             genre: "School",
@@ -43,9 +22,65 @@ const dummyTasks = [
    {
       completed: false,
       creationTime: Date.now(),
-      taskName: "Do Homework",
-      dueEpoch: Date.now() + 1,
-      taskExtra: "English & Math class",
+      name: "This is a task for sometime today.",
+      description: "Dummy task",
+      due: Date.now() + 82400000,
+      tags: [
+         {
+            genre: "School",
+            color: "Red"
+         }
+      ]
+   },
+   {
+      completed: false,
+      creationTime: Date.now(),
+      name: "This is for sometime this week (5 days out).",
+      description: "Dummy task",
+      due: Date.now() + 86400000 * 5,
+      tags: [
+         {
+            genre: "School",
+            color: "Red"
+         },
+         {
+            genre: "Work",
+            color: "Blue"
+         },
+         {
+            genre: "Home",
+            color: "Orange"
+         }
+      ]
+   },
+   {
+      completed: false,
+      creationTime: Date.now(),
+      name: "This is a task for 3 weeks out.",
+      description: "Dummy task",
+      due: Date.now() + 86400000 * 21,
+      tags: [
+         {
+            genre: "School",
+            color: "Red"
+         },
+         {
+            genre: "Work",
+            color: "Blue"
+         },
+         {
+            genre: "Home",
+            color: "Orange"
+         }
+      ]
+   },
+   {
+      completed: false,
+      creationTime: Date.now(),
+      name:
+         "This is a task for 2 months out. Should only be listed in View All tab.",
+      description: "Dummy task",
+      due: Date.now() + 86400000 * 60,
       tags: [
          {
             genre: "School",
@@ -63,12 +98,24 @@ const dummyTasks = [
    }
 ];
 
+const TasksPage = styled.section`
+   display: flex;
+   flex-direction: column;
+`;
+
 const Tasks = () => {
    return (
-      <>
+      <TasksPage>
          <DateButtons />
-         <TasksList tasks={dummyTasks} />
-      </>
+         <Switch>
+            <Route path="/tasks/days/:dayCount">
+               <TimeFilteredTasks tasks={dummyTasks} />
+            </Route>
+            <Route path="/tasks">
+               <AllTasks tasks={dummyTasks} />
+            </Route>
+         </Switch>
+      </TasksPage>
    );
 };
 
