@@ -2,8 +2,10 @@ import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PrivateRoute } from "./utils/PrivateRoute";
+
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import Tasks from "./components/Tasks/Tasks";
 
 // Global style that is applied to the whole project
 const GlobalStyle = createGlobalStyle`
@@ -36,14 +38,15 @@ const UIColors = {
 // Use these objects so theme can be dynamically changed --> https://styled-components.com/docs/advanced#theming
 const theme = {
    colors: {
-      primary: "#2c3d63",
-      secondary: "#aadcca",
-      light: "#f7f8f3",
-      warning: "#ff6f5e"
+      primary: UIColors.antarcticBlue,
+      secondary: UIColors.brookGreen,
+      light: UIColors.babyPowder,
+      warning: UIColors.grapefruitPulp,
+      container: "gainsboro"
    },
 
    fonts: {
-      base: "'Open Sans', sans-serif"
+      base: "'Open Sans', "
    }
 };
 
@@ -58,6 +61,9 @@ function App() {
             </Route>
             <Route path="/register">
                <Register />
+            </Route>
+            <Route path="/tasks">
+               <Tasks />
             </Route>
             <PrivateRoute path="/profile"></PrivateRoute>
          </Switch>
