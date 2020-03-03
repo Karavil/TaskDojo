@@ -11,7 +11,9 @@ const TasksContainer = styled.div`
    width: 60%;
    border-radius: 3px;
 
-   background: ${({ theme }) => theme.colors.mainGrey};
+   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
+
+   background: ${({ theme }) => theme.colors.background};
 `;
 
 const TasksList = ({ tasks }) => {

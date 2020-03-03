@@ -15,8 +15,18 @@ const ControlsContainer = styled.div`
 `;
 
 const NewTaskIcon = styled(FaPlusCircle)`
-   font-size: 2.2rem;
+   font-size: 2.5rem;
+   margin: 0.4rem;
    fill: ${({ theme }) => theme.colors.primary};
+
+   transition: 0.2s all;
+
+   &:hover {
+      cursor: pointer;
+
+      font-size: 2.9rem;
+      margin: 0.2rem;
+   }
 `;
 
 const Controls = () => {
