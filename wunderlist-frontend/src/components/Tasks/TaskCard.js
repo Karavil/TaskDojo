@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Separator } from "@smooth-ui/core-sc";
+import {
+   Button
+   // , Separator
+} from "@smooth-ui/core-sc";
 
 const StyledTaskCard = styled.div`
    display: flex;
@@ -48,6 +51,8 @@ const Right = styled.div`
 const GenreTag = styled(Button)`
    margin: 0 5px;
 `;
+
+// needs unique keys
 
 const TaskCard = ({ task }) => {
    const Tags = task.tags.map(tag => {
