@@ -29,10 +29,10 @@ const NewTaskIcon = styled(FaPlusCircle)`
    }
 `;
 
-const Controls = () => {
+const Controls = props => {
    return (
       <ControlsContainer>
-         <h2>Tasks</h2>
+         <h2>{props.title}</h2>
          <NewTaskIcon />
       </ControlsContainer>
    );

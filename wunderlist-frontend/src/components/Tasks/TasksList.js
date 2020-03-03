@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Switch, Route } from "react-router-dom";
 
 import TaskCard from "./TaskCard";
 import Controls from "./Controls";
@@ -18,13 +19,29 @@ const TasksContainer = styled.div`
 
 const TasksList = ({ tasks }) => {
    const Tasks = tasks.map(task => {
-      return <TaskCard task={task} />;
+      return <TaskCard key={task.creationTime} task={task} />;
    });
 
    return (
       <TasksContainer>
-         <Controls />
-         {Tasks}
+         <Switch>
+            <Route path="/tasks/today">
+               <Controls title="Today" />
+               {Tasks}
+            </Route>
+            <Route path="/tasks/week">
+               <Controls title="This Week" />
+               {Tasks}
+            </Route>
+            <Route path="/tasks/month">
+               <Controls title="This Month" />
+               {Tasks}
+            </Route>
+            <Route path="/tasks">
+               <Controls title="All Tasks" />
+               {Tasks}
+            </Route>
+         </Switch>
       </TasksContainer>
    );
 };

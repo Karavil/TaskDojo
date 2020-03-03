@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import { Button } from "@smooth-ui/core-sc";
 
 const ButtonGroup = styled.div`
@@ -51,23 +52,31 @@ const ViewAllButton = styled(DateRangeButton)`
    }
 `;
 
-const DateButtons = () => {
+const DateButtons = props => {
    return (
       <ButtonGroup margin="10px auto" flexDirection="column">
          <ButtonGroup flexDirection="row">
-            <DateRangeButton left variant="primary" scale="lg">
-               This Week
-            </DateRangeButton>
-            <DateRangeButton middle variant="primary" scale="lg">
-               Today
-            </DateRangeButton>
-            <DateRangeButton right variant="primary" scale="lg">
-               This Month
-            </DateRangeButton>
+            <NavLink to="/tasks/today">
+               <DateRangeButton left variant="primary" scale="lg">
+                  Today
+               </DateRangeButton>
+            </NavLink>
+            <NavLink to="/tasks/week">
+               <DateRangeButton middle variant="primary" scale="lg">
+                  This Week
+               </DateRangeButton>
+            </NavLink>
+            <NavLink to="/tasks/month">
+               <DateRangeButton right variant="primary" scale="lg">
+                  This Month
+               </DateRangeButton>
+            </NavLink>
          </ButtonGroup>
-         <ViewAllButton variant="secondaryDark" scale="lg">
-            View All
-         </ViewAllButton>
+         <NavLink to="/tasks">
+            <ViewAllButton variant="secondaryDark" scale="lg">
+               View All
+            </ViewAllButton>
+         </NavLink>
       </ButtonGroup>
    );
 };
