@@ -30,7 +30,7 @@ const LoginForm = props => {
       console.log("Login Button! ", data);
       reset();
 
-      // login request sends to tasks page
+      // login request sends --> tasks page
       axios
          .post(baseUrl + "/login", {
             email: data.email,
@@ -38,7 +38,7 @@ const LoginForm = props => {
          })
          .then(res => {
             console.log(res.data);
-            localStorage.setItem("AUTH_TOKEN", res.data.payload);
+            localStorage.setItem("AUTH_TOKEN", res.data.token);
             localStorage.setItem("USER_ID", res.data.id);
             history.push("/tasks");
          })
@@ -58,6 +58,7 @@ const LoginForm = props => {
          })
          .then(res => {
             console.log("Registration successful:", res.data);
+            // registration includes token to login --> tasks page
             onLoginSubmit(data);
          })
          .catch(err => {
@@ -67,7 +68,7 @@ const LoginForm = props => {
 
    // routerHistory
    const history = useHistory();
-   // baseURL
+   // baseUrl
    const baseUrl = "https://wunderlist7.herokuapp.com/api";
 
    return (
