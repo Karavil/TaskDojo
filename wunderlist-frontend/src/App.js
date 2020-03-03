@@ -6,8 +6,8 @@ import { Switch, Route } from "react-router-dom";
 import { PrivateRoute } from "./utils/PrivateRoute";
 
 import { Profile } from "./components/Profile/Profile";
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import LoginForm from "./components/Login/LoginForm";
+import RegisterForm from "./components/Register/RegisterForm";
 import Tasks from "./components/Tasks/Tasks";
 
 import NavBar from "./components/Navbar/Navbar";
@@ -43,7 +43,6 @@ const AppContainer = styled.div`
 
    padding-top: 100px;
 
-   display: flex;
    justify-content: center;
 `;
 
@@ -87,10 +86,10 @@ function App() {
                <PrivateRoute path="/tasks" component={Tasks} />
                <PrivateRoute path="/profile" component={Profile} />
                <Route path="/login">
-                  <Login />
+                  <LoginForm />
                </Route>
                <Route path="/register">
-                  <Register />
+                  <RegisterForm />
                </Route>
                <Route path="/testUser" component={TestUser} />
 

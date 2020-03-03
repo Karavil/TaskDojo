@@ -11,7 +11,8 @@ import {
    Input,
    InputDiv,
    ButtonBox,
-   FormButton
+   FormButton,
+   FormHeader
 } from "../../styles/Forms";
 
 //Yup form validation
@@ -28,8 +29,6 @@ const LoginForm = props => {
 
    const onLoginSubmit = data => {
       console.log("Login Button! ", data);
-      reset();
-
       // login request sends --> tasks page
       axios
          .post(baseUrl + "/login", {
@@ -37,7 +36,7 @@ const LoginForm = props => {
             password: data.password
          })
          .then(res => {
-            console.log(res.data);
+            reset();
             localStorage.setItem("AUTH_TOKEN", res.data.token);
             localStorage.setItem("USER_ID", res.data.id);
             history.push("/tasks");
@@ -49,8 +48,6 @@ const LoginForm = props => {
 
    const onRegisterSubmit = data => {
       console.log("Register button! ", data);
-      reset();
-
       axios
          .post(baseUrl + "/register", {
             email: data.email,
@@ -73,7 +70,7 @@ const LoginForm = props => {
 
    return (
       <Form onSubmit={handleSubmit(onLoginSubmit)}>
-         <h2>Authenticate</h2>
+         <FormHeader>Sign in to continue.</FormHeader>
 
          <InputDiv>
             <Input
@@ -100,10 +97,19 @@ const LoginForm = props => {
          </InputDiv>
 
          <ButtonBox>
-            <FormButton outline width="49%" type="submit">
+            <FormButton
+               outline
+               variant="secondaryDark"
+               width="49%"
+               type="submit"
+            >
                Log In
             </FormButton>
-            <FormButton width="49%" onClick={handleSubmit(onRegisterSubmit)}>
+            <FormButton
+               variant="secondaryDark"
+               width="49%"
+               onClick={handleSubmit(onRegisterSubmit)}
+            >
                Register
             </FormButton>
          </ButtonBox>
