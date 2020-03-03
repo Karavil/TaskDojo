@@ -39,9 +39,10 @@ const AppContainer = styled.div`
    background: white;
    height: 100vh;
 
+   padding-top: 100px;
+
    display: flex;
    justify-content: center;
-   align-items: center;
 `;
 
 // UI Theme
