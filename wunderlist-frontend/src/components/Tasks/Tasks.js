@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 
 import { TimeFilteredTasks, AllTasks } from "./TasksList";
 import DateButtons from "./DateButtons";
@@ -97,9 +98,14 @@ const dummyTasks = [
    }
 ];
 
+const TasksPage = styled.section`
+   display: flex;
+   flex-direction: column;
+`;
+
 const Tasks = () => {
    return (
-      <>
+      <TasksPage>
          <DateButtons />
          <Switch>
             <Route path="/tasks/days/:dayCount">
@@ -109,7 +115,7 @@ const Tasks = () => {
                <AllTasks tasks={dummyTasks} />
             </Route>
          </Switch>
-      </>
+      </TasksPage>
    );
 };
 

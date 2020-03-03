@@ -56,7 +56,7 @@ const ViewAllButton = styled(DateRangeButton)`
 
 const DateButtons = props => {
    return (
-      <ButtonGroup margin="10px auto" flexDirection="column">
+      <ButtonGroup margin="0 0 30px" flexDirection="column">
          <ButtonGroup flexDirection="row">
             <NavLink to="/tasks/days/1">
                <DateRangeButton left variant="primary" scale="lg">
