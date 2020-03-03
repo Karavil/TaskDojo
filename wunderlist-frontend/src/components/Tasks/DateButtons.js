@@ -30,17 +30,17 @@ const DateRangeButton = styled(Button)`
       }
    }};
 
-   border: ${({ theme }) => `3px solid ${theme.colors.secondary}`};
+   border: ${({ theme }) => `3px solid ${theme.colors.background}`};
 
-   border-left: ${props =>
-      props.middle ? `1px solid ${props.theme.colors.secondary}` : {}};
-   border-right: ${props =>
-      props.middle ? `1px solid ${props.theme.colors.secondary}` : {}};
+   border-left: ${props => (props.middle ? `none` : {})};
+   border-right: ${props => (props.middle ? `none` : {})};
 `;
 
 const ViewAllButton = styled(DateRangeButton)`
    padding: 0.1rem 8rem 0.3rem;
+
    border-top: none;
+   border-color: ${({ theme }) => theme.colors.secondary};
    border-radius: 0 0 50px 50px;
 
    &:hover {
