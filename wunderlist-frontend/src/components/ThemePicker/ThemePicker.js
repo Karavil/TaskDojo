@@ -16,7 +16,7 @@ const ColorCircle = styled.div`
    height: 35px;
 
    background-color: ${props => props.color};
-   border: 1px solid white;
+   border: 2px solid white;
    border-radius: 50%;
 
    margin-left: 10px;
