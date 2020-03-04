@@ -17,7 +17,6 @@ const TasksContainer = styled.div`
    width: 100%;
 
    border-radius: 0 0 10px 10px;
-   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
 
    background: ${({ theme }) => theme.colors.background};
 `;

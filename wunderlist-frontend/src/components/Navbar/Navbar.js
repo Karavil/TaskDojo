@@ -10,9 +10,11 @@ import { FaUserCircle } from "react-icons/fa";
 const StyledNav = styled.nav`
    background: white;
    border-radius: 0 0 7px 7px;
-   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
+   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
 
    overflow: hidden;
+
+   background-color: ${({ theme }) => theme.colors.background};
 
    position: fixed; /* Set the navbar to fixed position */
    z-index: 1000;
@@ -42,7 +44,6 @@ const LogoLink = styled(NavLink)`
    justify-content: flex-start;
 
    text-decoration: none;
-   color: black;
 
    letter-spacing: 0.08rem;
    font-size: 1.1rem;
@@ -51,8 +52,12 @@ const LogoLink = styled(NavLink)`
       margin: 0;
    }
 
+   h2 {
+      color: ${({ theme }) => theme.colors.dark};
+   }
+
    span {
-      color: ${({ theme }) => theme.colors.secondaryDark};
+      color: ${({ theme }) => theme.colors.secondary};
    }
 `;
 
@@ -67,7 +72,7 @@ const UserProfile = styled.div`
 
 const ProfileIcon = styled(FaUserCircle)`
    font-size: 2rem;
-   color: ${({ theme }) => theme.colors.primary};
+   color: ${({ theme }) => theme.colors.secondary};
 
    &:hover {
       cursor: pointer;

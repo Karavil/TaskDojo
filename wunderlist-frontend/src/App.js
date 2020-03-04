@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
    h1,h2,h3,h4,h5,h6{
       font-family: 'Montserrat', sans-serif;
-      color: ${({ theme }) => theme.colors.primary}
+      color: ${({ theme }) => theme.colors.secondary}
    }
 
    body {
@@ -35,8 +35,8 @@ const GlobalStyle = createGlobalStyle`
       background: white;
       height: 100vh;
 
-      background: #757f9a; 
-      background: linear-gradient(to right, #d7dde8, #757f9a);
+      background: #0f0c29;  
+      background: linear-gradient(to right, #502E88, #e9e4f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
    }
 `;
 
@@ -49,12 +49,15 @@ const AppContainer = styled.div`
 // Use these objects so theme can be dynamically changed --> https://styled-components.com/docs/advanced#theming
 const theme = {
    colors: {
-      primary: "#261F37",
-      secondary: "#6159BD",
-      secondaryDark: "#4a4493",
-      background: "#D7DDE8",
-      light: "#D7DDE8",
-      dark: "1F242C",
+      primary: "white",
+      secondary: "#502E88",
+
+      background: "white",
+      contrast: "black",
+
+      light: "white",
+      dark: "#363754",
+
       info: "#757F9A",
       warning: "#ff6f5e"
    },

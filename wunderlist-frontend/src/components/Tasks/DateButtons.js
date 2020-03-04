@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { NavLink } from "react-router-dom";
 
 import { Button } from "@smooth-ui/core-sc";
@@ -27,13 +27,11 @@ const RangeButtons = styled.div`
 
 const DateRangeButton = styled(Button)`
    font-weight: 600;
-   color: white;
+   background: ${({ theme }) => theme.colors.secondary};
+   color: ${({ theme }) => theme.colors.light};
 
    padding: 0.6rem 1rem;
    width: 200px;
-
-   background-color: ${props =>
-      props.active ? props.theme.colors.secondaryDark : {}};
 
    border-radius: ${props => {
       if (props.left) {
@@ -45,8 +43,11 @@ const DateRangeButton = styled(Button)`
       }
    }};
 
-   border: 0.5px solid transparent;
-   border-color: ${({ theme }) => theme.colors.background};
+   border: 2px solid transparent;
+   border-color: ${({ theme }) => theme.colors.primary};
+
+   border-right: ${props => props.middle && "none"};
+   border-left: ${props => props.middle && "none"};
 
    border-bottom: none;
 
@@ -60,7 +61,6 @@ const DateRangeButton = styled(Button)`
 const ViewAllButton = styled(DateRangeButton)`
    width: 300px;
    border-radius: 5px 5px 0 0;
-   border-color: ${({ theme }) => theme.colors.dark};
 `;
 
 const TasksIcon = styled(FaTasks)`
@@ -82,23 +82,23 @@ const DateButtons = props => {
       <ButtonGroup flexDirection="row">
          <RangeButtons>
             <NavLink to="/tasks/days/1">
-               <DateRangeButton left variant="primary" scale="lg">
+               <DateRangeButton left variant="secondary" scale="lg">
                   <InboxIcon /> Today
                </DateRangeButton>
             </NavLink>
             <NavLink to="/tasks/days/7">
-               <DateRangeButton middle variant="primary" scale="lg">
+               <DateRangeButton middle variant="secondary" scale="lg">
                   Next 7 Days
                </DateRangeButton>
             </NavLink>
             <NavLink to="/tasks/days/30">
-               <DateRangeButton right variant="primary" scale="lg">
+               <DateRangeButton right variant="secondary" scale="lg">
                   Next 30 Days
                </DateRangeButton>
             </NavLink>
          </RangeButtons>
          <NavLink to="/tasks">
-            <ViewAllButton variant="secondaryDark" scale="lg">
+            <ViewAllButton variant="secondary" scale="lg">
                View All <TasksIcon />
             </ViewAllButton>
          </NavLink>

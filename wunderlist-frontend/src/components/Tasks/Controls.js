@@ -8,16 +8,16 @@ const ControlsContainer = styled.div`
    align-items: center;
 
    h2 {
+      color: ${({ theme }) => theme.colors.secondary};
       margin: 0;
-      font-size: 2rem;
-      color: ${({ theme }) => theme.colors.primary};
+      font-size: 1.8rem;
    }
 `;
 
 const NewTaskIcon = styled(FaPlusCircle)`
    font-size: 2.5rem;
    margin: 0.4rem;
-   fill: ${({ theme }) => theme.colors.primary};
+   fill: ${({ theme }) => theme.colors.secondary};
 
    transition: 0.2s all;
 
