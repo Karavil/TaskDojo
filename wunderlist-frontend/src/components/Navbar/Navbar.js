@@ -103,7 +103,7 @@ const NavBar = () => {
          <NavContainer>
             <LogoLink to="/">
                <h2>
-                  Wundernote<span>7</span>
+                  Wunderlist<span>7</span>
                </h2>
             </LogoLink>
             <UserProfile>
