@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "@smooth-ui/core-sc";
 import { Switch, Route } from "react-router-dom";
@@ -17,14 +17,14 @@ import { TestUser } from "./components/TestUser/TestUser";
 
 // Global style that is applied to the whole project
 const GlobalStyle = createGlobalStyle`
-   @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700&display=swap');
-
+   @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700');
    * {
+      font-family: 'Raleway', sans-serif;
       box-sizing: border-box;
    }
 
    h1,h2,h3,h4,h5,h6{
-      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.6px;
       color: ${({ theme }) => theme.colors.secondary}
    }
 
@@ -36,7 +36,8 @@ const GlobalStyle = createGlobalStyle`
       height: 100vh;
 
       background: #0f0c29;  
-      background: linear-gradient(to right, #502E88, #e9e4f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: ${({ theme }) =>
+         `linear-gradient(to right, ${theme.colors.secondary}, #e9e4f0)`}; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
    }
 `;
 
@@ -46,28 +47,33 @@ const AppContainer = styled.div`
    justify-content: center;
 `;
 
-// Use these objects so theme can be dynamically changed --> https://styled-components.com/docs/advanced#theming
-const theme = {
-   colors: {
-      primary: "white",
-      secondary: "#502E88",
-
-      background: "white",
-      contrast: "black",
-
-      light: "white",
-      dark: "#363754",
-
-      info: "#757F9A",
-      warning: "#ff6f5e"
-   },
-
-   fonts: {
-      base: "'Open Sans', "
-   }
-};
-
 function App() {
+   const [theme, setTheme] = useState({
+      colors: {
+         primary: "white",
+         secondary: "#502E88",
+
+         background: "white",
+         contrast: "black",
+
+         light: "white",
+         dark: "#363754",
+
+         info: "#757F9A",
+         warning: "#ff6f5e"
+      },
+
+      fonts: {
+         base: "'Open Sans', "
+      }
+   });
+
+   const changeThemeColor = colorCode => {
+      let newTheme = { ...theme };
+      newTheme.colors.secondary = colorCode;
+      setTheme(newTheme);
+   };
+
    return (
       <ThemeProvider theme={theme}>
          <Normalize />

@@ -53,11 +53,11 @@ const LogoLink = styled(NavLink)`
    }
 
    h2 {
-      color: ${({ theme }) => theme.colors.dark};
+      color: ${({ theme }) => theme.colors.secondary};
    }
 
    span {
-      color: ${({ theme }) => theme.colors.secondary};
+      color: ${({ theme }) => theme.colors.dark};
    }
 `;
 

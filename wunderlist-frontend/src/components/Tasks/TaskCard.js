@@ -23,8 +23,7 @@ const StyledTaskCard = styled.div`
 
    &:hover {
       cursor: pointer;
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-         0 10px 10px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25), 0 3px 5px rgba(0, 0, 0, 0.22);
    }
 
    h3,
@@ -57,7 +56,6 @@ const Right = styled.div`
 
 const GenreTag = styled(Button)`
    margin: 0 5px;
-   font-weight: 600;
 `;
 
 const TaskCard = ({ task }) => {
