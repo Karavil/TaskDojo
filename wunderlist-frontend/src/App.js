@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "@smooth-ui/core-sc";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import { PrivateRoute } from "./utils/PrivateRoute";
 
@@ -83,10 +83,7 @@ function App() {
          <AppContainer>
             <NavBar />
             <Switch>
-               <PrivateRoute path="/tasks">
-                  <Tasks />
-                  <ThemePicker setColorTheme={setColorTheme} />
-               </PrivateRoute>
+               <PrivateRoute path="/tasks" component={Tasks} />
                <PrivateRoute path="/profile">
                   <Profile />
                </PrivateRoute>
@@ -97,11 +94,11 @@ function App() {
                   <RegisterForm />
                </Route>
                <Route path="/testUser" component={TestUser} />
-               <PrivateRoute path="/">
-                  <Tasks />
-                  <ThemePicker setColorTheme={setColorTheme} />
-               </PrivateRoute>
+               <Redirect exact from="/" to="/tasks" />
             </Switch>
+            <Route path="/tasks">
+               <ThemePicker setColorTheme={setColorTheme} />
+            </Route>
          </AppContainer>
       </ThemeProvider>
    );
