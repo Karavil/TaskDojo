@@ -50,6 +50,7 @@ const AppContainer = styled.div`
 
    padding-top: 100px;
 
+   display: flex;
    justify-content: center;
 `;
 

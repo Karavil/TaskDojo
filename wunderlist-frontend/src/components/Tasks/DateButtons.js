@@ -5,14 +5,24 @@ import { NavLink } from "react-router-dom";
 import { Button } from "@smooth-ui/core-sc";
 import { FaInbox, FaTasks } from "react-icons/fa";
 
+/**
+ * Styles (with styled-components)
+ */
+
 const ButtonGroup = styled.div`
    margin: ${props => props.margin || "0 auto"};
+   width: 100%;
 
    display: flex;
    flex-direction: ${props => props.flexDirection};
 
-   justify-content: center;
+   justify-content: space-between;
    align-items: center;
+`;
+
+const RangeButtons = styled.div`
+   display: flex;
+   flex-direction: row;
 `;
 
 const DateRangeButton = styled(Button)`
@@ -27,18 +37,18 @@ const DateRangeButton = styled(Button)`
 
    border-radius: ${props => {
       if (props.left) {
-         return "15px 0 0 15px";
+         return "5px 0 0 0";
       } else if (props.right) {
-         return "0 15px 15px 0";
+         return "0 5px 0 0";
       } else {
          return "0";
       }
    }};
 
-   border: ${({ theme }) => `3px solid ${theme.colors.background}`};
+   border: 0.5px solid transparent;
+   border-color: ${({ theme }) => theme.colors.background};
 
-   border-left: ${props => (props.middle ? `none` : {})};
-   border-right: ${props => (props.middle ? `none` : {})};
+   border-bottom: none;
 
    .today {
       display: flex;
@@ -48,44 +58,31 @@ const DateRangeButton = styled(Button)`
 `;
 
 const ViewAllButton = styled(DateRangeButton)`
-   padding: 0.1rem 8rem 0.3rem;
-   width: auto;
-
-   border-top: none;
-   border-color: ${({ theme }) => theme.colors.secondary};
-   border-radius: 0 0 50px 50px;
-
-   &:hover {
-      color: white;
-   }
-
-   &:not(:disabled):hover {
-      color: white;
-   }
-`;
-
-const CenterText = styled.div`
-   display: flex;
-   justify-content: center;
-   align-items: center;
+   border-radius: 5px 5px 0 0;
+   border-color: ${({ theme }) => theme.colors.dark};
 `;
 
 const TasksIcon = styled(FaTasks)`
-   margin: 0 8px;
+   position: relative;
+   top: 3px;
 `;
 const InboxIcon = styled(FaInbox)`
-   margin: 0 8px;
+   position: relative;
+   top: 4px;
 `;
+
+/**
+ * Logic & Design
+ * @param {*} props
+ */
 
 const DateButtons = props => {
    return (
-      <ButtonGroup margin="0 0 30px" flexDirection="column">
-         <ButtonGroup flexDirection="row">
+      <ButtonGroup flexDirection="row">
+         <RangeButtons>
             <NavLink to="/tasks/days/1">
                <DateRangeButton left variant="primary" scale="lg">
-                  <CenterText>
-                     <InboxIcon /> Today
-                  </CenterText>
+                  <InboxIcon /> Today
                </DateRangeButton>
             </NavLink>
             <NavLink to="/tasks/days/7">
@@ -98,12 +95,10 @@ const DateButtons = props => {
                   Next 30 Days
                </DateRangeButton>
             </NavLink>
-         </ButtonGroup>
+         </RangeButtons>
          <NavLink to="/tasks">
             <ViewAllButton variant="secondaryDark" scale="lg">
-               <CenterText>
-                  View All <TasksIcon />
-               </CenterText>
+               View All <TasksIcon />
             </ViewAllButton>
          </NavLink>
       </ButtonGroup>

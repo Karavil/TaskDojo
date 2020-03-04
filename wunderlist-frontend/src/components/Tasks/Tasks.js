@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { TimeFilteredTasks, AllTasks } from "./TasksList";
 import DateButtons from "./DateButtons";
 
+import Container from "../../styles/Container";
+
 const dummyTasks = [
    {
       completed: false,
@@ -98,14 +100,14 @@ const dummyTasks = [
    }
 ];
 
-const TasksPage = styled.section`
+const TasksContainer = styled(Container)`
    display: flex;
    flex-direction: column;
 `;
 
 const Tasks = () => {
    return (
-      <TasksPage>
+      <TasksContainer>
          <DateButtons />
          <Switch>
             <Route path="/tasks/days/:dayCount">
@@ -115,7 +117,7 @@ const Tasks = () => {
                <AllTasks tasks={dummyTasks} />
             </Route>
          </Switch>
-      </TasksPage>
+      </TasksContainer>
    );
 };
 

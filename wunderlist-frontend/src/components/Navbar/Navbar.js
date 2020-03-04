@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
+import Container from "../../styles/Container";
+
 import { FaUserCircle } from "react-icons/fa";
 
 // Main divs
@@ -19,12 +21,11 @@ const StyledNav = styled.nav`
    width: 100%; /* Full width */
 `;
 
-const NavContainer = styled.div`
+const NavContainer = styled(Container)`
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
 
-   width: 80%;
    margin: 0 auto;
 
    justify-content: space-between;
