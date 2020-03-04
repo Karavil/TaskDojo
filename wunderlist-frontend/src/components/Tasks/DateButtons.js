@@ -58,6 +58,7 @@ const DateRangeButton = styled(Button)`
 `;
 
 const ViewAllButton = styled(DateRangeButton)`
+   width: 300px;
    border-radius: 5px 5px 0 0;
    border-color: ${({ theme }) => theme.colors.dark};
 `;
