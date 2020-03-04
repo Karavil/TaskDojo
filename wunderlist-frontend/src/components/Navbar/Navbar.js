@@ -43,7 +43,7 @@ const LogoLink = styled(NavLink)`
    text-decoration: none;
    color: black;
 
-   letter-spacing: 0.05rem;
+   letter-spacing: 0.08rem;
    font-size: 1.1rem;
 
    * {
