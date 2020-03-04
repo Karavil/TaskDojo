@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+
 import { TimeFilteredTasks, AllTasks } from "./TasksList";
 import DateButtons from "./DateButtons";
 
@@ -136,7 +138,7 @@ const deleteTask = taskID => {
       });
 };
 
-const editTask = taskID => {
+const editTask = (data, taskID) => {
    axiosWithAuth()
       .put("/tasks", {
          task_id: taskID,
@@ -154,16 +156,22 @@ const editTask = taskID => {
       });
 };
 
+const taskFunctions = {
+   addNewTask: addNewTask,
+   deleteTask: deleteTask,
+   editTask: editTask
+};
+
 const Tasks = () => {
    return (
       <TasksContainer>
          <DateButtons />
          <Switch>
             <Route path="/tasks/days/:dayCount">
-               <TimeFilteredTasks tasks={dummyTasks} />
+               <TimeFilteredTasks addtasks={dummyTasks} />
             </Route>
             <Route path="/">
-               <AllTasks tasks={dummyTasks} />
+               <AllTasks taskFunctions={taskFunctions} tasks={dummyTasks} />
             </Route>
          </Switch>
       </TasksContainer>

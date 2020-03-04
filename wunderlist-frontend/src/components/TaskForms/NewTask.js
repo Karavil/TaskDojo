@@ -14,8 +14,6 @@ import {
 } from "../../styles/Forms";
 import { FaEdit, FaCalendarCheck } from "react-icons/fa";
 
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
-
 // Styles
 const InputSection = styled.section`
    display: flex;
@@ -42,33 +40,14 @@ const FormSchema = yup.object().shape({
    description: yup.string("Please make sure to enter a password.")
 });
 
-const NewTaskForm = props => {
+const NewTaskForm = ({ addNewTask }) => {
    const { register, handleSubmit, errors, reset } = useForm({
       validationSchema: FormSchema,
       mode: "onBlur"
    });
 
-   const submitNewTask = data => {
-      console.log("Submitting task...", data);
-      axiosWithAuth()
-         .post("/tasks", {
-            task: data.name,
-            description: data.description,
-            timestamp: "1234",
-            completed: false,
-            due_date: "123"
-         })
-         .then(res => {
-            console.log("Added new task", res.data);
-         })
-         .catch(err => {
-            console.log("Task Error:", err.response);
-         });
-      console.log("Submitted task", data);
-   };
-
    return (
-      <Form onSubmit={handleSubmit(submitNewTask)}>
+      <Form onSubmit={handleSubmit(addNewTask)}>
          <FormHeader>What's the task?</FormHeader>
 
          <InputContainer>
