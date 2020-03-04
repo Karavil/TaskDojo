@@ -103,7 +103,7 @@ const LoginForm = props => {
                width="49%"
                type="submit"
             >
-               Log In
+               Sign In
             </FormButton>
             <FormButton
                variant="secondaryDark"
