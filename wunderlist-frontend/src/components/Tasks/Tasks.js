@@ -168,7 +168,7 @@ const Tasks = () => {
          <DateButtons />
          <Switch>
             <Route path="/tasks/days/:dayCount">
-               <TimeFilteredTasks addtasks={dummyTasks} />
+               <TimeFilteredTasks addtasks={dummyTasks} tasks={dummyTasks} />
             </Route>
             <Route path="/">
                <AllTasks taskFunctions={taskFunctions} tasks={dummyTasks} />
