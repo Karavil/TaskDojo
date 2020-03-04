@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+
 import { Button } from "@smooth-ui/core-sc";
+import { FaInbox, FaTasks } from "react-icons/fa";
 
 const ButtonGroup = styled.div`
    margin: ${props => props.margin || "0 auto"};
@@ -15,9 +17,11 @@ const ButtonGroup = styled.div`
 
 const DateRangeButton = styled(Button)`
    font-weight: 600;
+   color: white;
+
    padding: 0.6rem 1rem;
    width: 200px;
-   color: white;
+
    background-color: ${props =>
       props.active ? props.theme.colors.secondaryDark : {}};
 
@@ -35,6 +39,12 @@ const DateRangeButton = styled(Button)`
 
    border-left: ${props => (props.middle ? `none` : {})};
    border-right: ${props => (props.middle ? `none` : {})};
+
+   .today {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
 `;
 
 const ViewAllButton = styled(DateRangeButton)`
@@ -54,13 +64,28 @@ const ViewAllButton = styled(DateRangeButton)`
    }
 `;
 
+const CenterText = styled.div`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+`;
+
+const TasksIcon = styled(FaTasks)`
+   margin: 0 8px;
+`;
+const InboxIcon = styled(FaInbox)`
+   margin: 0 8px;
+`;
+
 const DateButtons = props => {
    return (
       <ButtonGroup margin="0 0 30px" flexDirection="column">
          <ButtonGroup flexDirection="row">
             <NavLink to="/tasks/days/1">
                <DateRangeButton left variant="primary" scale="lg">
-                  Today
+                  <CenterText>
+                     <InboxIcon /> Today
+                  </CenterText>
                </DateRangeButton>
             </NavLink>
             <NavLink to="/tasks/days/7">
@@ -76,7 +101,9 @@ const DateButtons = props => {
          </ButtonGroup>
          <NavLink to="/tasks">
             <ViewAllButton variant="secondaryDark" scale="lg">
-               View All
+               <CenterText>
+                  View All <TasksIcon />
+               </CenterText>
             </ViewAllButton>
          </NavLink>
       </ButtonGroup>
