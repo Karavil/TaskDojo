@@ -2,9 +2,11 @@ import React from "react";
 // import styled from 'styled-components';
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { Alert } from "@smooth-ui/core-sc";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { Alert } from "@smooth-ui/core-sc";
+
+import axios from "axios";
+import { BASE_API_URL } from "../../utils/Constants";
 
 import {
    Form,
@@ -31,7 +33,7 @@ const LoginForm = props => {
       console.log("Login Button! ", data);
       // login request sends --> tasks page
       axios
-         .post(baseUrl + "/login", {
+         .post(BASE_API_URL + "/login", {
             email: data.email,
             password: data.password
          })
@@ -49,7 +51,7 @@ const LoginForm = props => {
    const onRegisterSubmit = data => {
       console.log("Register button! ", data);
       axios
-         .post(baseUrl + "/register", {
+         .post(BASE_API_URL + "/register", {
             email: data.email,
             password: data.password
          })
@@ -65,8 +67,6 @@ const LoginForm = props => {
 
    // routerHistory
    const history = useHistory();
-   // baseUrl
-   const baseUrl = "https://wunderlist7.herokuapp.com/api";
 
    return (
       <Form onSubmit={handleSubmit(onLoginSubmit)}>

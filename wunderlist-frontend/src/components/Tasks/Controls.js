@@ -33,8 +33,11 @@ const NewTaskIcon = styled(FaPlusCircle)`
    }
 `;
 
+Modal.setAppElement("#root");
+
 const Controls = props => {
    const [modalIsOpen, setIsOpen] = React.useState(false);
+
    function openModal() {
       setIsOpen(true);
    }
@@ -53,7 +56,7 @@ const Controls = props => {
             style={ModalStyle}
             contentLabel="Example Modal"
          >
-            <NewTaskForm />
+            <NewTaskForm closeModal={closeModal} />
          </Modal>
       </ControlsContainer>
    );

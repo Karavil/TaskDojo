@@ -1,9 +1,12 @@
 import React from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { Alert } from "@smooth-ui/core-sc";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
+
+import { Alert } from "@smooth-ui/core-sc";
+
+import axios from "axios";
+import { BASE_API_URL } from "../../utils/Constants";
 
 import {
    Form,
@@ -31,7 +34,7 @@ const RegisterForm = props => {
       // complete registration request sends to profile page
       // register button to redirect to 'register page' for completion or remain on 'login page' ?
       axios
-         .post(baseUrl + "/register", {
+         .post(BASE_API_URL + "/register", {
             email: data.email,
             password: data.password
          })
@@ -47,8 +50,6 @@ const RegisterForm = props => {
 
    // routerHistory
    const history = useHistory();
-   // baseUrl
-   const baseUrl = "https://wunderlist7.herokuapp.com/api";
 
    return (
       <Form onSubmit={handleSubmit(onRegisterSubmit)}>

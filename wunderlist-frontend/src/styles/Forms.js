@@ -23,6 +23,7 @@ export const Input = styled(SmoothInput)`
 
 export const InputDiv = styled.div`
    margin: 10px 0;
+   width: 100%;
 `;
 
 export const ButtonBox = styled.div`

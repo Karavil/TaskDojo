@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-   Button
-   // , Separator
-} from "@smooth-ui/core-sc";
+import { GenreTag } from "../Tags/Tags";
 
 const StyledTaskCard = styled.div`
    display: flex;
@@ -52,10 +49,6 @@ const Right = styled.div`
    flex-direction: row;
    align-items: center;
    justify-content: flex-end;
-`;
-
-const GenreTag = styled(Button)`
-   margin: 0 5px;
 `;
 
 const TaskCard = ({ task }) => {
