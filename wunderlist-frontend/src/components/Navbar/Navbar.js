@@ -21,14 +21,15 @@ const StyledNav = styled.nav`
    top: 0; /* Position the navbar at the top of the page */
 
    width: 100%; /* Full width */
+
+   display: flex;
+   justify-content: center;
 `;
 
 const NavContainer = styled(Container)`
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
-
-   margin: 0 auto;
 
    justify-content: space-between;
    align-items: center;
@@ -64,7 +65,6 @@ const LogoLink = styled(NavLink)`
 // Account buttons, login/register (on right)
 const UserProfile = styled.div`
    justify-self: flex-end;
-   width: 20%;
 
    display: flex;
    justify-content: flex-end;

@@ -97,16 +97,11 @@ const LoginForm = props => {
          </InputDiv>
 
          <ButtonBox>
-            <FormButton
-               outline
-               variant="secondaryDark"
-               width="49%"
-               type="submit"
-            >
+            <FormButton outline variant="secondary" width="49%" type="submit">
                Sign In
             </FormButton>
             <FormButton
-               variant="secondaryDark"
+               variant="secondary"
                width="49%"
                onClick={handleSubmit(onRegisterSubmit)}
             >

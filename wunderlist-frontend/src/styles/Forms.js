@@ -7,14 +7,13 @@ export const Form = styled.form`
 
    border: 2px solid ${({ theme }) => theme.colors.secondary};
    background: ${({ theme }) => theme.colors.primary};
-   color: white;
 
    border-radius: 15px;
 `;
 
 export const Input = styled(SmoothInput)`
    width: 100%;
-   border: 3px solid ${({ theme }) => theme.colors.background};
+   border: 1px solid ${({ theme }) => theme.colors.secondary};
    background-color: white;
 `;
 
@@ -32,22 +31,14 @@ export const ButtonBox = styled.div`
 export const FormButton = styled(Button)`
    width: ${props => props.width || "100%"};
    border-width: 2px;
-   border-color: ${({ theme }) => theme.colors.secondaryDark};
-
-   color: white;
+   border-color: ${({ theme }) => theme.colors.secondary};
 
    font-weight: 700;
    font-size: 1.2rem;
 
    margin: 15px 0;
-
-   &:hover,
-   :not(:disabled):hover {
-      color: white;
-   }
 `;
 
 export const FormHeader = styled.h2`
    margin: 5px 0 20px;
-   color: white;
 `;
