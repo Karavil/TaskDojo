@@ -9,7 +9,7 @@ import { Profile } from "./components/Profile/Profile";
 import LoginForm from "./components/Login/LoginForm";
 import RegisterForm from "./components/Register/RegisterForm";
 import Tasks from "./components/Tasks/Tasks";
-
+import ThemePicker from "./components/ThemePicker/ThemePicker";
 import NavBar from "./components/Navbar/Navbar";
 import { TestUser } from "./components/TestUser/TestUser";
 
@@ -37,14 +37,15 @@ const GlobalStyle = createGlobalStyle`
 
       background: #0f0c29;  
       background: ${({ theme }) =>
-         `linear-gradient(to right, ${theme.colors.secondary}, #e9e4f0)`}; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+         `linear-gradient(to right, ${theme.colors.secondary}, #e9e4f0)`};
    }
 `;
 
 const AppContainer = styled.div`
    padding-top: 100px;
    display: flex;
-   justify-content: center;
+   flex-direction: column;
+   align-items: center;
 `;
 
 function App() {
@@ -68,7 +69,7 @@ function App() {
       }
    });
 
-   const changeThemeColor = colorCode => {
+   const setColorTheme = colorCode => {
       let newTheme = { ...theme };
       newTheme.colors.secondary = colorCode;
       setTheme(newTheme);
@@ -82,8 +83,13 @@ function App() {
          <AppContainer>
             <NavBar />
             <Switch>
-               <PrivateRoute path="/tasks" component={Tasks} />
-               <PrivateRoute path="/profile" component={Profile} />
+               <PrivateRoute path="/tasks">
+                  <Tasks />
+                  <ThemePicker setColorTheme={setColorTheme} />
+               </PrivateRoute>
+               <PrivateRoute path="/profile">
+                  <Profile />
+               </PrivateRoute>
                <Route path="/login">
                   <LoginForm />
                </Route>
@@ -91,8 +97,10 @@ function App() {
                   <RegisterForm />
                </Route>
                <Route path="/testUser" component={TestUser} />
-
-               <PrivateRoute path="/" component={Tasks} />
+               <PrivateRoute path="/">
+                  <Tasks />
+                  <ThemePicker setColorTheme={setColorTheme} />
+               </PrivateRoute>
             </Switch>
          </AppContainer>
       </ThemeProvider>

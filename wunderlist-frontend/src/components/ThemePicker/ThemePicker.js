@@ -1,0 +1,43 @@
+import React from "react";
+import styled from "styled-components";
+import Container from "../../styles/Container";
+
+const Themes = styled.div`
+   display: flex;
+   width: 100%;
+   justify-content: flex-end;
+
+   padding: 20px 0;
+`;
+
+const ColorCircle = styled.div`
+   width: 35px;
+   height: 35px;
+
+   background-color: ${props => props.color};
+   border: 1px solid white;
+   border-radius: 50%;
+
+   margin-left: 10px;
+`;
+
+const colors = ["black", "red", "orange", "#502E88"];
+
+const ThemePicker = props => {
+   const ColorCircles = colors.map(color => {
+      return (
+         <ColorCircle
+            onClick={() => props.setColorTheme(color)}
+            color={color}
+         />
+      );
+   });
+
+   return (
+      <Container>
+         <Themes>{ColorCircles}</Themes>
+      </Container>
+   );
+};
+
+export default ThemePicker;
