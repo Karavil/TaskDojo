@@ -66,6 +66,8 @@ const ViewAllButton = styled(DateRangeButton)`
 const TasksIcon = styled(FaTasks)`
    position: relative;
    top: 3px;
+   margin: 0 7.5px;
+   font-size: 1.3rem;
 `;
 const InboxIcon = styled(FaInbox)`
    position: relative;

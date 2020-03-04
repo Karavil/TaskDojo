@@ -21,7 +21,7 @@ const ColorCircle = styled.div`
    margin-left: 10px;
 `;
 
-const colors = ["black", "red", "orange", "#502E88"];
+const colors = ["black", "#FF5722", "#4CAF50", "#C2185B", "#502E88"];
 
 const ThemePicker = props => {
    const ColorCircles = colors.map(color => {
