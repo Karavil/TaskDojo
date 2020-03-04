@@ -105,6 +105,55 @@ const TasksContainer = styled(Container)`
    flex-direction: column;
 `;
 
+const addNewTask = data => {
+   console.log("Submitting task...", data);
+   axiosWithAuth()
+      .post("/tasks", {
+         task: data.name,
+         description: data.description,
+         timestamp: "1234",
+         completed: false,
+         due_date: "123"
+      })
+      .then(res => {
+         console.log("Added new task", res.data);
+      })
+      .catch(err => {
+         console.log("Task Error:", err.response);
+      });
+};
+
+const deleteTask = taskID => {
+   axiosWithAuth()
+      .del("/tasks", {
+         task_id: taskID
+      })
+      .then(res => {
+         console.log("Deleted task", res.data);
+      })
+      .catch(err => {
+         console.log("Error:", err.response);
+      });
+};
+
+const editTask = taskID => {
+   axiosWithAuth()
+      .put("/tasks", {
+         task_id: taskID,
+         task: data.name,
+         description: data.description,
+         timestamp: "1234",
+         completed: false,
+         due_date: "123"
+      })
+      .then(res => {
+         console.log("Deleted task", res.data);
+      })
+      .catch(err => {
+         console.log("Error:", err.response);
+      });
+};
+
 const Tasks = () => {
    return (
       <TasksContainer>
