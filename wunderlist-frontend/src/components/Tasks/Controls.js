@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { FaPlusCircle } from "react-icons/fa";
 
+import Modal from "react-modal";
+import ModalStyle from "../../styles/ModalStyle";
+import NewTaskForm from "../TaskForms/NewTask";
+
 const ControlsContainer = styled.div`
    display: flex;
    justify-content: space-between;
@@ -30,10 +34,27 @@ const NewTaskIcon = styled(FaPlusCircle)`
 `;
 
 const Controls = props => {
+   const [modalIsOpen, setIsOpen] = React.useState(false);
+   function openModal() {
+      setIsOpen(true);
+   }
+
+   function closeModal() {
+      setIsOpen(false);
+   }
+
    return (
       <ControlsContainer>
          <h2>{props.title}</h2>
-         <NewTaskIcon />
+         <NewTaskIcon onClick={openModal} />
+         <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={ModalStyle}
+            contentLabel="Example Modal"
+         >
+            <NewTaskForm />
+         </Modal>
       </ControlsContainer>
    );
 };

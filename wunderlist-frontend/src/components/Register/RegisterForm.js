@@ -78,7 +78,7 @@ const RegisterForm = props => {
          </InputDiv>
 
          <ButtonBox>
-            <FormButton variant="secondaryDark" type="submit">
+            <FormButton variant="secondary" type="submit">
                Register
             </FormButton>
          </ButtonBox>
