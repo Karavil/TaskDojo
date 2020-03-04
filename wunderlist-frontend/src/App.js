@@ -38,7 +38,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const AppContainer = styled.div`
-   background: white;
+   background: #757f9a; /* fallback for old browsers */
+   background: -webkit-linear-gradient(
+      to right,
+      #d7dde8,
+      #757f9a
+   ); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #d7dde8, #757f9a);
+
    height: 100vh;
 
    padding-top: 100px;
@@ -46,27 +53,17 @@ const AppContainer = styled.div`
    justify-content: center;
 `;
 
-// UI Theme
-const UIColors = {
-   antarcticBlue: "#2c3d63",
-   brookGreen: "#aadcca",
-   darkerGreen: "#97c4b4",
-   babyPowder: "#f7f8f3",
-   grapefruitPulp: "#ff6f5e",
-   oliveish: "#6c887e",
-   greenishGrey: "#e8ede9"
-};
-
 // Use these objects so theme can be dynamically changed --> https://styled-components.com/docs/advanced#theming
 const theme = {
    colors: {
-      primary: UIColors.antarcticBlue,
-      secondary: UIColors.brookGreen,
-      secondaryDark: UIColors.darkerGreen,
-      background: UIColors.greenishGrey,
-      info: "gray",
-      light: UIColors.babyPowder,
-      warning: UIColors.grapefruitPulp
+      primary: "#261F37",
+      secondary: "#6159BD",
+      secondaryDark: "#4a4493",
+      background: "#D7DDE8",
+      light: "#D7DDE8",
+      dark: "1F242C",
+      info: "#757F9A",
+      warning: "#ff6f5e"
    },
 
    fonts: {
