@@ -4,7 +4,6 @@ import { Input as SmoothInput, Button } from "@smooth-ui/core-sc";
 export const Form = styled.form`
    width: 650px;
    padding: 30px 50px;
-   margin: 0 auto;
 
    border: 2px solid ${({ theme }) => theme.colors.secondary};
    background: ${({ theme }) => theme.colors.primary};

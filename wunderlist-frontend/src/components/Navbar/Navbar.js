@@ -56,30 +56,6 @@ const LogoLink = styled(NavLink)`
    }
 `;
 
-// Links (in the middle)
-const Links = styled.div`
-   font-size: 1.05rem;
-
-   display: flex;
-   justify-content: space-between;
-`;
-
-const StyledNavLink = styled(NavLink)`
-   color: black;
-   text-decoration: none;
-   position: relative;
-
-   padding: 0.4rem 0.2rem;
-   margin: 0 20px;
-
-   border-radius: 3px;
-   border-bottom: 4px solid transparent;
-
-   &.active {
-      border-color: ${props => props.theme.colors.gray700};
-   }
-`;
-
 // Account buttons, login/register (on right)
 const UserProfile = styled.div`
    justify-self: flex-end;
@@ -102,7 +78,7 @@ const NavBar = () => {
    return (
       <StyledNav>
          <NavContainer>
-            <LogoLink to="/">
+            <LogoLink to="/tasks">
                <h2>
                   Wunderlist<span>7</span>
                </h2>

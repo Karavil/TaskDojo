@@ -34,22 +34,14 @@ const GlobalStyle = createGlobalStyle`
       font-family: 'Open Sans', sans-serif;
       background: white;
       height: 100vh;
+
+      background: #757f9a; 
+      background: linear-gradient(to right, #d7dde8, #757f9a);
    }
 `;
 
 const AppContainer = styled.div`
-   background: #757f9a; /* fallback for old browsers */
-   background: -webkit-linear-gradient(
-      to right,
-      #d7dde8,
-      #757f9a
-   ); /* Chrome 10-25, Safari 5.1-6 */
-   background: linear-gradient(to right, #d7dde8, #757f9a);
-
-   height: 100vh;
-
    padding-top: 100px;
-
    display: flex;
    justify-content: center;
 `;
