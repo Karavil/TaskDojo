@@ -14,8 +14,7 @@ import {
 } from "../../styles/Forms";
 import { FaEdit, FaCalendarCheck } from "react-icons/fa";
 
-import axios from "axios";
-import { BASE_API_URL } from "../../utils/Constants";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 // Styles
 const InputSection = styled.section`
@@ -50,15 +49,22 @@ const NewTaskForm = props => {
    });
 
    const submitNewTask = data => {
-      axios
-         .get(BASE_API_URL + "/tasks")
+      console.log("Submitting task...", data);
+      axiosWithAuth()
+         .post("/tasks", {
+            task: data.name,
+            description: data.description,
+            timestamp: "1234",
+            completed: false,
+            due_date: "123"
+         })
          .then(res => {
-            console.log(res.data);
+            console.log("Added new task", res.data);
          })
          .catch(err => {
             console.log("Task Error:", err.response);
          });
-      console.log("Getting tasks", data);
+      console.log("Submitted task", data);
    };
 
    return (

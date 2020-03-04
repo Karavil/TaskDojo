@@ -4,7 +4,7 @@ export const axiosWithAuth = () => {
    const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
 
    return axios.create({
-      baseURL: "https://wunderlist7.herokuapp.com/",
+      baseURL: "https://wunderlist7.herokuapp.com/api",
       headers: {
          Authorization: AUTH_TOKEN,
          "Content-Type": "application/json"
