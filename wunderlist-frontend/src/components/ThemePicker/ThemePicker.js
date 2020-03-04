@@ -6,6 +6,7 @@ const Themes = styled.div`
    display: flex;
    width: 100%;
    justify-content: flex-end;
+   align-items: center;
 
    padding: 20px 0;
 `;
@@ -19,6 +20,10 @@ const ColorCircle = styled.div`
    border-radius: 50%;
 
    margin-left: 10px;
+
+   &:hover {
+      cursor: pointer;
+   }
 `;
 
 const colors = ["black", "#FF5722", "#4CAF50", "#C2185B", "#502E88"];
