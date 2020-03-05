@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import moment from "moment";
+
 import styled from "styled-components";
 import { Alert } from "@smooth-ui/core-sc";
 import {
@@ -41,13 +43,20 @@ const FormSchema = yup.object().shape({
    description: yup.string("Description should be a string.")
 });
 
+const formatEpoch = dueDate => {
+   if (dueDate) {
+      return moment.unix(dueDate / 1000).format("YYYY-MM-DD");
+   }
+   return null;
+};
+
 const EditTask = ({ task, taskFunctions, closeModal }) => {
    const { register, handleSubmit, errors } = useForm({
       validationSchema: FormSchema,
       defaultValues: {
          task: task.task || "",
          description: task.description || "",
-         due_date: task.due_date
+         due_date: formatEpoch(task.due_date)
       }
    });
 
@@ -104,7 +113,7 @@ const EditTask = ({ task, taskFunctions, closeModal }) => {
                Delete Task
             </FormButton>
             <FormButton width="69.5%" variant="secondary" type="submit">
-               Add Task
+               Submit
             </FormButton>
          </ButtonBox>
       </Form>

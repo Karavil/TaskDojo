@@ -76,6 +76,10 @@ const CheckboxChecked = styled(FaRegCheckSquare)`
 
 const DueAlert = styled(Alert)`
    padding: 0.5rem;
+   border: 1px solid;
+   border-color: ${props => (props.overdue ? "red" : "#D3D3D3")};
+   background-color: ${props => (props.overdue ? "#FF000022" : "#D3D3D322")};
+   color: ${props => (props.overdue ? "red !important" : {})};
 `;
 
 const TaskCheckbox = ({ completed, onClick }) => {
@@ -87,10 +91,22 @@ const TaskCheckbox = ({ completed, onClick }) => {
 };
 
 const TaskDueDate = ({ dueDate }) => {
+   let overdue = false;
+   if (dueDate < Date.now()) {
+      overdue = true;
+   }
+   if (overdue) {
+      const overDueTime = Date.now() - dueDate;
+      const overDueDays = Math.floor(overDueTime / 86400000);
+      return (
+         <DueAlert overdue={overdue.toString()}>
+            {"Overdue by " + overDueDays + " days"}
+         </DueAlert>
+      );
+   }
    return (
-      <DueAlert variant="secondary">
-         Due:
-         {moment.unix(dueDate / 1000).format(" dddd, MMMM Do YYYY")}
+      <DueAlert>
+         {moment.unix(dueDate / 1000).format("dddd, MMMM Do YYYY")}
       </DueAlert>
    );
 };

@@ -35,18 +35,16 @@ const Tasks = () => {
          .get("/tasks")
          .then(res => {
             res.data.task.map(task => {
-               if (task.completed === false) {
-                  const newTask = {
-                     task: task.task,
-                     description: task.description,
-                     completed: task.completed,
-                     id: task.id,
-                     creationTime: task.timestamp,
-                     due_date: task.due_date,
-                     tags: task.tags || []
-                  };
-                  setTasks(tasks => [...tasks, newTask]);
-               }
+               const newTask = {
+                  task: task.task,
+                  description: task.description,
+                  completed: task.completed,
+                  id: task.id,
+                  creationTime: task.timestamp,
+                  due_date: task.due_date,
+                  tags: task.tags || []
+               };
+               setTasks(tasks => [...tasks, newTask]);
             });
          })
          .catch(err => {
@@ -107,22 +105,15 @@ const Tasks = () => {
             description: formData.description || "",
             timestamp: Date.now(),
             completed: formData.completed || false,
-            due_date: formData.due_date || null
+            due_date: parseDateString(formData.due_date)
          })
          .then(res => {
-            const newTask = {
-               task: formData.task,
-               description: formData.description || "",
-               completed: formData.completed || false,
-               due_date: formData.due_date || null,
-               tags: []
-            };
             setTasks(tasks =>
                tasks.map(task => {
                   if (task.id === taskID) {
                      return {
                         ...task,
-                        ...newTask
+                        ...res.data.update
                      };
                   } else {
                      return { ...task };

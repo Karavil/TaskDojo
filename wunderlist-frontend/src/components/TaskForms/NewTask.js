@@ -61,15 +61,15 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
                name="task"
                ref={register}
             />
-            {
-               <Alert variant="secondary">
-                  Only a name is required for your task, all other inputs are
-                  optional.
-               </Alert>
-            }
             {errors.task && (
                <Alert variant="danger">{errors.task.message}</Alert>
             )}
+            {
+               <Alert variant="secondary">
+                  Only a name is required for your task; all other inputs are
+                  optional.
+               </Alert>
+            }
          </InputContainer>
 
          <InputSection>
