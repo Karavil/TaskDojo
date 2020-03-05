@@ -89,7 +89,7 @@ const DateButtons = props => {
                </DateRangeButton>
             </NavLink>
             <NavLink to="/tasks/days/7">
-               <DateRangeButton middle variant="secondary" scale="lg">
+               <DateRangeButton middle="true" variant="secondary" scale="lg">
                   Next 7 Days
                </DateRangeButton>
             </NavLink>

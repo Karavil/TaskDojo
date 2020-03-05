@@ -28,7 +28,6 @@ const filterTasks = (
    endTimeUnix,
    dueTimeRequired = false
 ) => {
-   console.log(startTimeUnix, endTimeUnix);
    return tasks.filter(task => {
       if (task.due && task.due >= startTimeUnix && task.due <= endTimeUnix) {
          return task;
@@ -38,13 +37,10 @@ const filterTasks = (
    });
 };
 
-export const TimeFilteredTasks = ({ tasks, taskFunctions }) => {
+const TasksList = ({ tasks, taskFunctions, all }) => {
+   //Need a dynamic title if we are showing a time specific task list
    const [title, setTitle] = useState("");
    const { dayCount } = useParams();
-
-   // Calculate the Unix Epoch time (MS) for the amount of days out
-   const endTimeUnix = Date.now() + dayCount * ONE_DAY_MS;
-
    // If the day count (parameter in url) is updated, update title and reload
    useEffect(() => {
       if (dayCount) {
@@ -58,40 +54,44 @@ export const TimeFilteredTasks = ({ tasks, taskFunctions }) => {
       }
    }, [dayCount]);
 
-   const Tasks = filterTasks(tasks, 0, endTimeUnix).map(task => {
-      return <TaskCard key={task.creationTime} task={task} />;
-   });
+   if (all) {
+      const TasksToday = filterTasks(tasks, 0, Date.now() + ONE_DAY_MS).map(
+         task => {
+            return <TaskCard key={task.creationTime} task={task} />;
+         }
+      );
 
-   return (
-      <TasksContainer>
-         <Controls taskFunctions={taskFunctions} title={title} />
-         {Tasks}
-      </TasksContainer>
-   );
-};
-
-export const AllTasks = ({ tasks, taskFunctions }) => {
-   const TasksToday = filterTasks(tasks, 0, Date.now() + ONE_DAY_MS).map(
-      task => {
+      const OtherTasks = filterTasks(
+         tasks,
+         Date.now() + ONE_DAY_MS + 1,
+         MAX_EPOCH_TIME,
+         true
+      ).map(task => {
          return <TaskCard key={task.creationTime} task={task} />;
-      }
-   );
+      });
 
-   const OtherTasks = filterTasks(
-      tasks,
-      Date.now() + ONE_DAY_MS + 1,
-      MAX_EPOCH_TIME,
-      true
-   ).map(task => {
-      return <TaskCard key={task.creationTime} task={task} />;
-   });
+      return (
+         <TasksContainer>
+            <Controls taskFunctions={taskFunctions} title={"Today's Tasks"} />
+            {TasksToday}
+            <Controls taskFunctions={taskFunctions} title={"After Today"} />
+            {OtherTasks}
+         </TasksContainer>
+      );
+   } else {
+      // Calculate the Unix Epoch time (MS) for the amount of days out
+      const endTimeUnix = Date.now() + dayCount * ONE_DAY_MS;
+      const Tasks = filterTasks(tasks, 0, endTimeUnix).map(task => {
+         return <TaskCard key={task.creationTime} task={task} />;
+      });
 
-   return (
-      <TasksContainer>
-         <Controls taskFunctions={taskFunctions} title={"Today's Tasks"} />
-         {TasksToday}
-         <Controls taskFunctions={taskFunctions} title={"After Today"} />
-         {OtherTasks}
-      </TasksContainer>
-   );
+      return (
+         <TasksContainer>
+            <Controls taskFunctions={taskFunctions} title={title} />
+            {Tasks}
+         </TasksContainer>
+      );
+   }
 };
+
+export default TasksList;

@@ -37,6 +37,7 @@ Modal.setAppElement("#root");
 
 const Controls = props => {
    const [modalIsOpen, setIsOpen] = React.useState(false);
+   console.log(props);
 
    function openModal() {
       setIsOpen(true);
@@ -54,7 +55,6 @@ const Controls = props => {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={ModalStyle}
-            contentLabel="Example Modal"
          >
             <NewTaskForm
                taskFunctions={props.taskFunctions}

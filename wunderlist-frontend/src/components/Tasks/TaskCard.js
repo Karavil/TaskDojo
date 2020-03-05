@@ -11,6 +11,8 @@ const StyledTaskCard = styled.div`
    padding: 8px 20px;
    margin: 20px 0;
 
+   min-height: 62px;
+
    background: ${({ theme }) => theme.colors.primary};
    color: white;
    border-radius: 3px;
