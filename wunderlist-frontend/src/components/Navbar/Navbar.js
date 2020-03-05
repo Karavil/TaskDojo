@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import Container from "../../styles/Container";
 
@@ -89,7 +89,9 @@ const NavBar = () => {
                </h2>
             </LogoLink>
             <UserProfile>
-               <ProfileIcon />
+               <Link to="/profile">
+                  <ProfileIcon />
+               </Link>
             </UserProfile>
          </NavContainer>
       </StyledNav>
