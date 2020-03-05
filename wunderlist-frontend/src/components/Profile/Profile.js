@@ -7,21 +7,27 @@ import { FaUserCircle } from "react-icons/fa";
 
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-const ProfileContainer = styled(Container)`
+const StyledProfile = styled.section`
    background-color: ${({ theme }) => theme.colors.primary};
-   border-radius: 3px;
+   border-radius: 0 0 10px 10px;
+
+   width: 100%;
+   padding: 30px;
 `;
 
 const CurrentInfo = styled.div`
    display: flex;
    width: 100%;
    justify-content: space-between;
-   align-items: center;
-
-   padding: 50px 30px;
+   align-items: flex-start;
 
    h1 {
+      margin: 0 0 10px 0;
+   }
+
+   p {
       margin: 0;
+      font-size: 1.1rem;
    }
 `;
 
@@ -43,24 +49,42 @@ const AvatarButtons = styled.div`
    justify-content: space-between;
 `;
 
-const Profile = () => {
-   const [profile, setProfile] = useState({
-      first_name: "First",
-      last_name: "Last",
-      age: "1",
-      occupation: "Dummy"
-   });
+const ProfileTab = styled.div`
+   height: 54px;
 
-   // useEffect(() => {
-   //    axiosWithAuth()
-   //       .get("/profile")
-   //       .then(res => {
-   //          setProfile(res.data);
-   //       })
-   //       .catch(err => {
-   //          console.log(err);
-   //       });
-   // });
+   background: ${({ theme }) => theme.colors.secondary};
+
+   border: ${({ theme }) => `2px solid ${theme.colors.primary}`};
+   border-radius: 5px 5px 0 0;
+
+   display: flex;
+   align-items: center;
+
+   padding: 0 30px;
+
+   span {
+      font-size: 1.333rem;
+      font-weight: 600;
+      margin: 0;
+      color: ${({ theme }) => theme.colors.primary};
+   }
+`;
+
+const Profile = () => {
+   const [profile, setProfile] = useState({});
+
+   const [updated, setUpdated] = useState(false);
+
+   useEffect(() => {
+      axiosWithAuth()
+         .get("/profile")
+         .then(res => {
+            setProfile(res.data.profile[res.data.profile.length - 1]);
+         })
+         .catch(err => {
+            console.log(err);
+         });
+   }, [updated]);
 
    const createProfile = userData => {
       axiosWithAuth()
@@ -71,18 +95,20 @@ const Profile = () => {
             occupation: "developer"
          })
          .then(res => {
-            setProfile(res.userData);
+            setUpdated(true);
          })
          .catch(err => {
             console.log("Profile post error:", err);
          });
    };
 
+   createProfile();
+
    const editProfile = userData => {
       axiosWithAuth()
          .put("/profile/1")
          .then(res => {
-            setProfile(res.userData);
+            setUpdated(true);
          })
          .catch(err => {
             console.log("Profile put error:", err);
@@ -100,33 +126,37 @@ const Profile = () => {
          });
    };
    return (
-      <ProfileContainer>
-         <CurrentInfo>
-            <ProfileInfo>
-               <h1>My Profile</h1>
-               <p>
-                  {profile.first_name && `${profile.first_name}`}
-                  {profile.last_name && ` ${profile.last_name}`}
-               </p>
-               {profile.occupation && <p>{profile.occupation}</p>}
-               {profile.age && <p>{profile.age} years old.</p>}
-            </ProfileInfo>
-            <AvatarInfo>
-               <DefaultAvatar />
-               <AvatarButtons>
-                  <Button outline variant="secondary">
-                     Change Avatar
-                  </Button>
-                  <Button outline variant="secondary">
-                     Upload Avatar
-                  </Button>
-                  <Button outline variant="warning">
-                     Delete Avatar
-                  </Button>
-               </AvatarButtons>
-            </AvatarInfo>
-         </CurrentInfo>
-      </ProfileContainer>
+      <Container flexDirection="column">
+         <ProfileTab>
+            <span>Profile Information</span>
+         </ProfileTab>
+         <StyledProfile>
+            <CurrentInfo>
+               <ProfileInfo>
+                  <h1>
+                     {profile.first_name && `${profile.first_name}`}
+                     {profile.last_name && ` ${profile.last_name}`}
+                  </h1>
+                  {profile.occupation && <p>{profile.occupation}</p>}
+                  {profile.age && <p>{profile.age} years old</p>}
+               </ProfileInfo>
+               <AvatarInfo>
+                  <DefaultAvatar />
+                  <AvatarButtons>
+                     <Button outline variant="secondary">
+                        Change Avatar
+                     </Button>
+                     <Button outline variant="secondary">
+                        Upload Avatar
+                     </Button>
+                     <Button outline variant="warning">
+                        Delete Avatar
+                     </Button>
+                  </AvatarButtons>
+               </AvatarInfo>
+            </CurrentInfo>
+         </StyledProfile>
+      </Container>
    );
 };
 

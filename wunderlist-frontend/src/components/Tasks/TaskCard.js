@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { GenreTag } from "../Tags/Tags";
 
@@ -54,6 +54,16 @@ const Right = styled.div`
 `;
 
 const TaskCard = ({ task }) => {
+   const [modalIsOpen, setIsOpen] = useState(false);
+
+   function openModal() {
+      setIsOpen(true);
+   }
+
+   function closeModal() {
+      setIsOpen(false);
+   }
+
    const Tags = task.tags.map((tag, index) => {
       return (
          <GenreTag key={index} outline variant={tag.color}>
@@ -63,7 +73,7 @@ const TaskCard = ({ task }) => {
    });
 
    return (
-      <StyledTaskCard>
+      <StyledTaskCard onClick={e => console.log(task.id)}>
          <Left>
             <input type="checkbox" value={task.complete} />
             <TaskInfo>

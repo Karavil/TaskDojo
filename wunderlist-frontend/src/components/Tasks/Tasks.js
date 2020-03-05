@@ -13,6 +13,7 @@ const TasksContainer = styled(Container)`
    display: flex;
    flex-direction: column;
 `;
+
 const Tasks = () => {
    const [tasks, setTasks] = useState([]);
 
@@ -70,7 +71,7 @@ const Tasks = () => {
 
    const deleteTask = taskID => {
       axiosWithAuth()
-         .del("/tasks", {
+         .delete("/task/1", {
             task_id: taskID
          })
          .then(res => {
@@ -83,7 +84,7 @@ const Tasks = () => {
 
    const editTask = (data, taskID) => {
       axiosWithAuth()
-         .put("/tasks", {
+         .put("/tasks/1", {
             task_id: taskID,
             task: data.name || "",
             description: data.description || "",

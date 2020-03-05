@@ -88,9 +88,6 @@ function App() {
             <NavBar />
 
             <PrivateRoute path="/tasks" component={Tasks} />
-            <Route path="/tasks">
-               <ThemePicker setColorTheme={setColorTheme} />
-            </Route>
 
             <PrivateRoute path="/profile" component={Profile} />
 
@@ -103,6 +100,10 @@ function App() {
             </Route>
 
             <Route path="/testUser" component={TestUser} />
+
+            <Route path="/">
+               <ThemePicker setColorTheme={setColorTheme} />
+            </Route>
             <Route exact path="/">
                <Redirect to="/tasks" />
             </Route>
