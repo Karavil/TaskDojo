@@ -37,7 +37,6 @@ Modal.setAppElement("#root");
 
 const Controls = props => {
    const [modalIsOpen, setIsOpen] = useState(false);
-   console.log(props);
 
    function openModal() {
       setIsOpen(true);

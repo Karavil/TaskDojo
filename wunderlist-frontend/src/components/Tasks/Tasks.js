@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import styled from "styled-components";
 
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 import TasksList from "./TasksList";
 import DateButtons from "./DateButtons";
 
+import styled from "styled-components";
 import Container from "../../styles/Container";
-
-const TasksContainer = styled(Container)`
-   display: flex;
-   flex-direction: column;
-`;
+import LoadingAnimation from "../Animations/Loading";
 
 const Tasks = () => {
    const [tasks, setTasks] = useState([]);
+   const [loading, setLoading] = useState(true);
 
    useEffect(() => {
+      setLoading(true);
       setTasks([]);
       axiosWithAuth()
          .get("/tasks")
@@ -39,6 +37,11 @@ const Tasks = () => {
          })
          .catch(err => {
             console.log("Failed getting user tasks:", err);
+         })
+         .then(() => {
+            setTimeout(() => {
+               setLoading(false);
+            }, 2000);
          });
    }, []);
 
@@ -128,21 +131,24 @@ const Tasks = () => {
    };
 
    return (
-      <TasksContainer>
+      <Container flexDirection="column">
          <DateButtons />
-         <Switch>
-            <Route path="/tasks/days/:daysOut">
-               <TasksList taskFunctions={taskFunctions} tasks={tasks} />
-            </Route>
-            <Route path="/">
-               <TasksList
-                  taskFunctions={taskFunctions}
-                  tasks={tasks}
-                  all="true"
-               />
-            </Route>
-         </Switch>
-      </TasksContainer>
+         {loading && <LoadingAnimation />}
+         {!loading && (
+            <Switch>
+               <Route path="/tasks/days/:daysOut">
+                  <TasksList taskFunctions={taskFunctions} tasks={tasks} />
+               </Route>
+               <Route path="/">
+                  <TasksList
+                     taskFunctions={taskFunctions}
+                     tasks={tasks}
+                     all="true"
+                  />
+               </Route>
+            </Switch>
+         )}
+      </Container>
    );
 };
 
