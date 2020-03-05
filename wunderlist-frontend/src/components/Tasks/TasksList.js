@@ -98,8 +98,14 @@ const TasksFilteredByDueDate = ({ taskFunctions, tasks }) => {
 };
 
 const TasksList = ({ tasks, taskFunctions, all }) => {
-   if (all) return <AllTasks tasks={tasks} taskFunctions={taskFunctions} />;
+   if (!tasks || tasks.length === 0)
+      return (
+         <TasksContainer>
+            <NoTasksAnimation taskFunctions={taskFunctions} />
+         </TasksContainer>
+      );
 
+   if (all) return <AllTasks tasks={tasks} taskFunctions={taskFunctions} />;
    return (
       <TasksFilteredByDueDate tasks={tasks} taskFunctions={taskFunctions} />
    );
