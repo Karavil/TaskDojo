@@ -4,7 +4,10 @@ import Modal from "react-modal";
 import ModalStyle from "../../styles/ModalStyle";
 import EditTaskForm from "../TaskForms/EditTask";
 
+import moment from "moment";
+
 import styled from "styled-components";
+import { Alert } from "@smooth-ui/core-sc";
 import { GenreTag } from "../Tags/Tags";
 import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
 
@@ -71,11 +74,24 @@ const CheckboxChecked = styled(FaRegCheckSquare)`
    margin: 0;
 `;
 
+const DueAlert = styled(Alert)`
+   padding: 0.5rem;
+`;
+
 const TaskCheckbox = ({ completed, onClick }) => {
    return completed ? (
       <CheckboxChecked onClick={onClick} />
    ) : (
       <CheckboxEmpty onClick={onClick} />
+   );
+};
+
+const TaskDueDate = ({ dueDate }) => {
+   return (
+      <DueAlert variant="secondary">
+         Due:
+         {moment.unix(dueDate / 1000).format(" dddd, MMMM Do YYYY")}
+      </DueAlert>
    );
 };
 
@@ -115,8 +131,9 @@ const TaskCard = ({ task, taskFunctions }) => {
                   onClick={checkboxOnClick}
                />
                <TaskInfo>
-                  <h3>{task.name}</h3>
+                  <h3>{task.task}</h3>
                   <p>{task.description}</p>
+                  {task.due_date && <TaskDueDate dueDate={task.due_date} />}
                </TaskInfo>
             </Left>
             <Right>{Tags}</Right>

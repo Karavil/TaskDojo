@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Container from "../../styles/Container";
 import { Button } from "@smooth-ui/core-sc";
 import { FaUserCircle } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
@@ -74,6 +75,7 @@ const Profile = () => {
    const [profile, setProfile] = useState({});
 
    const [updated, setUpdated] = useState(false);
+   const history = useHistory();
 
    useEffect(() => {
       axiosWithAuth()
@@ -126,6 +128,12 @@ const Profile = () => {
          });
    };
 
+   const signOut = () => {
+      localStorage.removeItem("AUTH_TOKEN");
+      localStorage.removeItem("USER_ID");
+      history.push("/login");
+   };
+
    createProfile();
    return (
       <Container flexDirection="column">
@@ -153,6 +161,9 @@ const Profile = () => {
                      </Button>
                      <Button outline variant="warning">
                         Delete Avatar
+                     </Button>
+                     <Button onClick={signOut} outline variant="secondary">
+                        Sign Out
                      </Button>
                   </AvatarButtons>
                </AvatarInfo>

@@ -7,6 +7,7 @@ import { Alert } from "@smooth-ui/core-sc";
 import {
    Form,
    Input,
+   CalendarInput,
    InputDiv as InputContainer,
    ButtonBox,
    FormButton,
@@ -36,14 +37,13 @@ const CalendarIcon = styled(FaCalendarCheck)`
 
 // Yup form validation
 const FormSchema = yup.object().shape({
-   name: yup.string().required("Please enter a name for your task."),
-   description: yup.string("Please make sure to enter a password.")
+   task: yup.string().required("Please enter a name for your task."),
+   description: yup.string("Description should be a string.")
 });
 
 const NewTaskForm = ({ taskFunctions, closeModal }) => {
    const { register, handleSubmit, errors } = useForm({
-      validationSchema: FormSchema,
-      mode: "onBlur"
+      validationSchema: FormSchema
    });
 
    const onSubmit = data => {
@@ -58,11 +58,17 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
             <Input
                placeholder="Name of the task"
                type="text"
-               name="name"
+               name="task"
                ref={register}
             />
-            {errors.email && (
-               <Alert variant="danger">{errors.name.message}</Alert>
+            {
+               <Alert variant="secondary">
+                  Only a name is required for your task, all other inputs are
+                  optional.
+               </Alert>
+            }
+            {errors.task && (
+               <Alert variant="danger">{errors.task.message}</Alert>
             )}
          </InputContainer>
 
@@ -75,7 +81,7 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
                   name="description"
                   ref={register}
                />
-               {errors.password && (
+               {errors.description && (
                   <Alert variant="danger">{errors.description.message}</Alert>
                )}
             </InputContainer>
@@ -84,7 +90,7 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
          <InputSection>
             <CalendarIcon />
             <InputContainer>
-               <Input type="date" name="due" ref={register} />
+               <CalendarInput type="date" name="due_date" ref={register} />
             </InputContainer>
          </InputSection>
 
