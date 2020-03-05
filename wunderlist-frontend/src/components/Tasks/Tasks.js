@@ -85,29 +85,34 @@ const Tasks = () => {
          });
    };
 
+   const toggleCompleted = (taskData, taskID) => {
+      taskData.completed = !taskData.completed;
+      editTask(taskData, taskID);
+   };
+
    const editTask = (formData, taskID) => {
       axiosWithAuth()
-         .put("/tasks/1" + taskID, {
+         .put("/tasks/" + taskID, {
             task: formData.name || "",
             description: formData.description || "",
             timestamp: Date.now(),
-            completed: formData.completed || false,
+            completed: true,
             due_date: formData.due_date || null
          })
          .then(res => {
-            //
             const newTask = {
-               completed: false,
-               id: taskID,
-               creationTime: Date.now(),
-               name: formData.name,
-               description: formData.description,
+               task: formData.name || "",
+               description: formData.description || "",
+               timestamp: Date.now(),
+               completed: true,
                due_date: formData.due_date || null,
+               id: taskID,
                tags: []
             };
             setTasks(tasks =>
                tasks.map(task => {
                   if (task.id === taskID) {
+                     console.log("editing");
                      return {
                         ...task,
                         ...newTask
@@ -127,7 +132,8 @@ const Tasks = () => {
    const taskFunctions = {
       addNewTask: addNewTask,
       deleteTask: deleteTask,
-      editTask: editTask
+      editTask: editTask,
+      toggleCompleted: toggleCompleted
    };
 
    return (

@@ -6,6 +6,7 @@ import EditTaskForm from "../TaskForms/EditTask";
 
 import styled from "styled-components";
 import { GenreTag } from "../Tags/Tags";
+import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
 
 const StyledTaskCard = styled.div`
    display: flex;
@@ -41,7 +42,7 @@ const StyledTaskCard = styled.div`
 `;
 
 const TaskInfo = styled.div`
-   margin: 0 50px;
+   margin: 0 30px;
 `;
 
 const Left = styled.div`
@@ -58,8 +59,29 @@ const Right = styled.div`
    justify-content: flex-end;
 `;
 
+const CheckboxEmpty = styled(FaRegSquare)`
+   color: ${({ theme }) => theme.colors.secondary};
+   font-size: 2rem;
+   margin: 0;
+`;
+
+const CheckboxChecked = styled(FaRegCheckSquare)`
+   color: ${({ theme }) => theme.colors.secondary};
+   font-size: 2rem;
+   margin: 0;
+`;
+
+const TaskCheckbox = ({ completed, onClick }) => {
+   return completed ? (
+      <CheckboxChecked onClick={onClick} />
+   ) : (
+      <CheckboxEmpty onClick={onClick} />
+   );
+};
+
 const TaskCard = ({ task, taskFunctions }) => {
    const [modalIsOpen, setIsOpen] = useState(false);
+   const [taskComplete, setTaskComplete] = useState(task.completed);
 
    function openModal() {
       setIsOpen(true);
@@ -68,6 +90,13 @@ const TaskCard = ({ task, taskFunctions }) => {
    function closeModal() {
       setIsOpen(false);
    }
+
+   const checkboxOnClick = e => {
+      console.log(e);
+      e.stopPropagation();
+      taskFunctions.toggleCompleted(task, task.id);
+      setTaskComplete(taskComplete => !taskComplete);
+   };
 
    const Tags = task.tags.map((tag, index) => {
       return (
@@ -81,7 +110,10 @@ const TaskCard = ({ task, taskFunctions }) => {
       <>
          <StyledTaskCard onClick={openModal}>
             <Left>
-               <input type="checkbox" value={task.complete} />
+               <TaskCheckbox
+                  completed={taskComplete}
+                  onClick={checkboxOnClick}
+               />
                <TaskInfo>
                   <h3>{task.name}</h3>
                   <p>{task.description}</p>
