@@ -41,7 +41,7 @@ const FormSchema = yup.object().shape({
 });
 
 const EditTask = ({ task, taskFunctions, closeModal }) => {
-   const { register, handleSubmit, errors, reset } = useForm({
+   const { register, handleSubmit, errors } = useForm({
       validationSchema: FormSchema,
       mode: "onBlur",
       defaultValues: {

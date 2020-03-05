@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory, useLocation } from "react-router-dom";
 import * as yup from "yup";
 
 import styled from "styled-components";
@@ -42,7 +41,7 @@ const FormSchema = yup.object().shape({
 });
 
 const NewTaskForm = ({ taskFunctions, closeModal }) => {
-   const { register, handleSubmit, errors, reset } = useForm({
+   const { register, handleSubmit, errors } = useForm({
       validationSchema: FormSchema,
       mode: "onBlur"
    });

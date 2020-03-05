@@ -35,7 +35,7 @@ export const ButtonBox = styled.div`
 
 export const FormButton = styled(Button)`
    width: ${props => props.width || "100%"};
-   border: 2px solid;
+   border: 1px solid;
 
    border-color: ${props =>
       props.borderColor

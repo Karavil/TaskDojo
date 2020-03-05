@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "@smooth-ui/core-sc";
 import { Route, Redirect } from "react-router-dom";

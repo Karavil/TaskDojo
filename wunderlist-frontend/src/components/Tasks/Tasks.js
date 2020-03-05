@@ -6,7 +6,6 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import TasksList from "./TasksList";
 import DateButtons from "./DateButtons";
 
-import styled from "styled-components";
 import Container from "../../styles/Container";
 import LoadingAnimation from "../Animations/Loading";
 import NoTasksAnimation from "../Animations/NoTasks";
