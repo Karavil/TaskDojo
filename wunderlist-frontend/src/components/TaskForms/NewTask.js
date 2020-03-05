@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useHistory, useLocation } from "react-router-dom";
 import * as yup from "yup";
 
 import styled from "styled-components";
@@ -40,16 +41,20 @@ const FormSchema = yup.object().shape({
    description: yup.string("Please make sure to enter a password.")
 });
 
-const NewTaskForm = ({ addNewTask }) => {
+const NewTaskForm = ({ taskFunctions, closeModal }) => {
    const { register, handleSubmit, errors, reset } = useForm({
       validationSchema: FormSchema,
       mode: "onBlur"
    });
 
-   return (
-      <Form onSubmit={handleSubmit(addNewTask)}>
-         <FormHeader>What's the task?</FormHeader>
+   const onSubmit = data => {
+      taskFunctions.addNewTask(data);
+      closeModal();
+   };
 
+   return (
+      <Form onSubmit={handleSubmit(onSubmit)}>
+         <FormHeader>What's the task?</FormHeader>
          <InputContainer>
             <Input
                placeholder="Name of the task"

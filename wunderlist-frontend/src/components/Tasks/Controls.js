@@ -56,7 +56,10 @@ const Controls = props => {
             style={ModalStyle}
             contentLabel="Example Modal"
          >
-            <NewTaskForm closeModal={closeModal} />
+            <NewTaskForm
+               taskFunctions={props.taskFunctions}
+               closeModal={closeModal}
+            />
          </Modal>
       </ControlsContainer>
    );

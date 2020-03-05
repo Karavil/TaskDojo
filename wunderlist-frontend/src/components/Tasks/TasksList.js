@@ -38,7 +38,7 @@ const filterTasks = (
    });
 };
 
-export const TimeFilteredTasks = ({ tasks }) => {
+export const TimeFilteredTasks = ({ tasks, taskFunctions }) => {
    const [title, setTitle] = useState("");
    const { dayCount } = useParams();
 
@@ -64,13 +64,13 @@ export const TimeFilteredTasks = ({ tasks }) => {
 
    return (
       <TasksContainer>
-         <Controls title={title} />
+         <Controls taskFunctions={taskFunctions} title={title} />
          {Tasks}
       </TasksContainer>
    );
 };
 
-export const AllTasks = ({ tasks }) => {
+export const AllTasks = ({ tasks, taskFunctions }) => {
    const TasksToday = filterTasks(tasks, 0, Date.now() + ONE_DAY_MS).map(
       task => {
          return <TaskCard key={task.creationTime} task={task} />;
@@ -88,9 +88,9 @@ export const AllTasks = ({ tasks }) => {
 
    return (
       <TasksContainer>
-         <Controls title={"Today's Tasks"} />
+         <Controls taskFunctions={taskFunctions} title={"Today's Tasks"} />
          {TasksToday}
-         <Controls title={"After Today"} />
+         <Controls taskFunctions={taskFunctions} title={"After Today"} />
          {OtherTasks}
       </TasksContainer>
    );

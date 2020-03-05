@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 
@@ -121,7 +121,7 @@ const addNewTask = data => {
          console.log("Added new task", res.data);
       })
       .catch(err => {
-         console.log("Task Error:", err.response);
+         console.log("Post Error:", err.response);
       });
 };
 
@@ -163,12 +163,25 @@ const taskFunctions = {
 };
 
 const Tasks = () => {
+   useEffect(() => {
+      axiosWithAuth()
+         .get("/tasks")
+         .then(res => {
+            console.log("Tasks list:", res.data.task);
+         })
+         .catch(err => {
+            console.log("Failed getting user tasks:", err);
+         });
+   }, []);
    return (
       <TasksContainer>
          <DateButtons />
          <Switch>
             <Route path="/tasks/days/:dayCount">
-               <TimeFilteredTasks addtasks={dummyTasks} tasks={dummyTasks} />
+               <TimeFilteredTasks
+                  taskFunctions={dummyTasks}
+                  tasks={dummyTasks}
+               />
             </Route>
             <Route path="/">
                <AllTasks taskFunctions={taskFunctions} tasks={dummyTasks} />
