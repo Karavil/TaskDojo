@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaPlusCircle } from "react-icons/fa";
 
@@ -36,7 +36,7 @@ const NewTaskIcon = styled(FaPlusCircle)`
 Modal.setAppElement("#root");
 
 const Controls = props => {
-   const [modalIsOpen, setIsOpen] = React.useState(false);
+   const [modalIsOpen, setIsOpen] = useState(false);
    console.log(props);
 
    function openModal() {
@@ -51,6 +51,7 @@ const Controls = props => {
       <ControlsContainer>
          <h2>{props.title}</h2>
          <NewTaskIcon onClick={openModal} />
+
          <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}

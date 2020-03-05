@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+
+import Modal from "react-modal";
+import ModalStyle from "../../styles/ModalStyle";
+import EditTaskForm from "../TaskForms/EditTask";
+
 import styled from "styled-components";
 import { GenreTag } from "../Tags/Tags";
 
@@ -53,7 +58,7 @@ const Right = styled.div`
    justify-content: flex-end;
 `;
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, taskFunctions }) => {
    const [modalIsOpen, setIsOpen] = useState(false);
 
    function openModal() {
@@ -73,16 +78,29 @@ const TaskCard = ({ task }) => {
    });
 
    return (
-      <StyledTaskCard onClick={e => console.log(task.id)}>
-         <Left>
-            <input type="checkbox" value={task.complete} />
-            <TaskInfo>
-               <h3>{task.name}</h3>
-               <p>{task.description}</p>
-            </TaskInfo>
-         </Left>
-         <Right>{Tags}</Right>
-      </StyledTaskCard>
+      <>
+         <StyledTaskCard onClick={openModal}>
+            <Left>
+               <input type="checkbox" value={task.complete} />
+               <TaskInfo>
+                  <h3>{task.name}</h3>
+                  <p>{task.description}</p>
+               </TaskInfo>
+            </Left>
+            <Right>{Tags}</Right>
+         </StyledTaskCard>
+         <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={ModalStyle}
+         >
+            <EditTaskForm
+               task={task}
+               taskFunctions={taskFunctions}
+               closeModal={closeModal}
+            />
+         </Modal>
+      </>
    );
 };
 

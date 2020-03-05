@@ -55,7 +55,13 @@ const TasksList = ({ tasks, taskFunctions, all }) => {
    if (all) {
       const TasksToday = filterTasks(tasks, 0, Date.now() + ONE_DAY_MS).map(
          task => {
-            return <TaskCard key={task.id} task={task} />;
+            return (
+               <TaskCard
+                  taskFunctions={taskFunctions}
+                  key={task.id}
+                  task={task}
+               />
+            );
          }
       );
 
@@ -65,7 +71,9 @@ const TasksList = ({ tasks, taskFunctions, all }) => {
          MAX_EPOCH_TIME,
          true
       ).map(task => {
-         return <TaskCard key={task.id} task={task} />;
+         return (
+            <TaskCard taskFunctions={taskFunctions} key={task.id} task={task} />
+         );
       });
 
       return (
@@ -80,7 +88,9 @@ const TasksList = ({ tasks, taskFunctions, all }) => {
       // Calculate the Unix Epoch time (MS) for the amount of days out
       const endTimeUnix = Date.now() + dayCount * ONE_DAY_MS;
       const Tasks = filterTasks(tasks, 0, endTimeUnix).map(task => {
-         return <TaskCard key={task.id} task={task} />;
+         return (
+            <TaskCard taskFunctions={taskFunctions} key={task.id} task={task} />
+         );
       });
 
       return (

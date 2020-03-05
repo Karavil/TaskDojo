@@ -35,8 +35,12 @@ export const ButtonBox = styled.div`
 
 export const FormButton = styled(Button)`
    width: ${props => props.width || "100%"};
-   border-width: 2px;
-   border-color: ${({ theme }) => theme.colors.secondary};
+   border: 2px solid;
+
+   border-color: ${props =>
+      props.borderColor
+         ? `${props.borderColor}`
+         : `${props.theme.colors.secondary}`};
 
    font-weight: 700;
    font-size: 1.2rem;

@@ -89,10 +89,10 @@ const Profile = () => {
    const createProfile = userData => {
       axiosWithAuth()
          .post("/profile", {
-            first_name: "matthew",
-            last_name: "bedard",
+            first_name: "First",
+            last_name: "Name",
             age: 25,
-            occupation: "developer"
+            occupation: "Developer"
          })
          .then(res => {
             setUpdated(true);
@@ -101,8 +101,6 @@ const Profile = () => {
             console.log("Profile post error:", err);
          });
    };
-
-   createProfile();
 
    const editProfile = userData => {
       axiosWithAuth()
@@ -125,6 +123,8 @@ const Profile = () => {
             console.log("Profile delete error", err);
          });
    };
+
+   createProfile();
    return (
       <Container flexDirection="column">
          <ProfileTab>

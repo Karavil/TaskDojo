@@ -53,13 +53,14 @@ const Tasks = () => {
          })
          .then(res => {
             //UPDATE THIS
+            console.log("Got new task with id:", res.data.id[0]);
             const newTask = {
                completed: false,
-               id: Math.random(),
+               id: res.data.id[0],
                creationTime: Date.now(),
                name: data.name,
                description: data.description,
-               due: undefined,
+               due_date: undefined,
                tags: []
             };
             setTasks(tasks => [...tasks, newTask]);
@@ -71,32 +72,52 @@ const Tasks = () => {
 
    const deleteTask = taskID => {
       axiosWithAuth()
-         .delete("/task/1", {
-            task_id: taskID
-         })
+         .delete("/task/" + taskID)
          .then(res => {
             console.log("Deleted task", res.data);
+            setTasks(tasks => tasks.filter(task => task.id !== taskID));
          })
          .catch(err => {
             console.log("Error:", err.response);
          });
    };
 
-   const editTask = (data, taskID) => {
+   const editTask = (formData, taskID) => {
       axiosWithAuth()
-         .put("/tasks/1", {
-            task_id: taskID,
-            task: data.name || "",
-            description: data.description || "",
+         .put("/tasks/1" + taskID, {
+            task: formData.name || "",
+            description: formData.description || "",
             timestamp: Date.now(),
-            completed: data.completed || false,
-            due_date: data.due_date || null
+            completed: formData.completed || false,
+            due_date: formData.due_date || null
          })
          .then(res => {
-            console.log("Deleted task", res.data);
+            //
+            const newTask = {
+               completed: false,
+               id: taskID,
+               creationTime: Date.now(),
+               name: formData.name,
+               description: formData.description,
+               due_date: formData.due_date || null,
+               tags: []
+            };
+            setTasks(tasks =>
+               tasks.map(task => {
+                  if (task.id === taskID) {
+                     return {
+                        ...task,
+                        ...newTask
+                     };
+                  } else {
+                     return { ...task };
+                  }
+               })
+            );
+            console.log("Edited task", res.data);
          })
          .catch(err => {
-            console.log("Error:", err.response);
+            console.log("Error while editing:", err.response);
          });
    };
 
