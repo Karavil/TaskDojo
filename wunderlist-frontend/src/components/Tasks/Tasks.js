@@ -131,7 +131,7 @@ const Tasks = () => {
       <TasksContainer>
          <DateButtons />
          <Switch>
-            <Route path="/tasks/days/:dayCount">
+            <Route path="/tasks/days/:daysOut">
                <TasksList taskFunctions={taskFunctions} tasks={tasks} />
             </Route>
             <Route path="/">

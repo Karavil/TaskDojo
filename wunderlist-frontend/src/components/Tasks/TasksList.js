@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import Controls from "./Controls";
 import TaskCard from "./TaskCard";
+import NoTasksAnimation from "../Animations/NoTasks";
 
 //One day in milliseconds
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
@@ -35,71 +36,73 @@ const filterTasks = (
    });
 };
 
-const TasksList = ({ tasks, taskFunctions, all }) => {
-   //Need a dynamic title if we are showing a time specific task list
+const AllTasks = ({ tasks, taskFunctions }) => {
+   const TasksToday = filterTasks(
+      tasks,
+      0,
+      Date.now() + ONE_DAY_MS
+   ).map(task => (
+      <TaskCard taskFunctions={taskFunctions} key={task.id} task={task} />
+   ));
+
+   const OtherTasks = filterTasks(
+      tasks,
+      Date.now() + ONE_DAY_MS + 1,
+      MAX_EPOCH_TIME,
+      true
+   ).map(task => (
+      <TaskCard taskFunctions={taskFunctions} key={task.id} task={task} />
+   ));
+
+   return (
+      <TasksContainer>
+         <Controls taskFunctions={taskFunctions} title={"Today's Tasks"} />
+         {TasksToday}
+         <Controls taskFunctions={taskFunctions} title={"After Today"} />
+         {OtherTasks}
+      </TasksContainer>
+   );
+};
+
+const TasksFilteredByDueDate = ({ taskFunctions, tasks }) => {
    const [title, setTitle] = useState("");
-   const { dayCount } = useParams();
-   // If the day count (parameter in url) is updated, update title and reload
+   const { daysOut } = useParams();
+   console.log("params", useParams());
+
    useEffect(() => {
-      if (dayCount) {
-         if (dayCount === "1") {
+      if (daysOut) {
+         if (daysOut === "1") {
             setTitle("Today's Tasks");
          } else {
-            setTitle(`Next ${dayCount} days`);
+            setTitle(`Next ${daysOut} days`);
          }
       } else {
          setTitle("All Tasks");
       }
-   }, [dayCount]);
+   }, [daysOut]);
 
-   if (all) {
-      const TasksToday = filterTasks(tasks, 0, Date.now() + ONE_DAY_MS).map(
-         task => {
-            return (
-               <TaskCard
-                  taskFunctions={taskFunctions}
-                  key={task.id}
-                  task={task}
-               />
-            );
-         }
-      );
-
-      const OtherTasks = filterTasks(
-         tasks,
-         Date.now() + ONE_DAY_MS + 1,
-         MAX_EPOCH_TIME,
-         true
-      ).map(task => {
-         return (
-            <TaskCard taskFunctions={taskFunctions} key={task.id} task={task} />
-         );
-      });
-
+   // Calculate the Unix Epoch time (MS) for the amount of days out
+   const maxTime = Date.now() + daysOut * ONE_DAY_MS;
+   const Tasks = filterTasks(tasks, 0, maxTime).map(task => {
       return (
-         <TasksContainer>
-            <Controls taskFunctions={taskFunctions} title={"Today's Tasks"} />
-            {TasksToday}
-            <Controls taskFunctions={taskFunctions} title={"After Today"} />
-            {OtherTasks}
-         </TasksContainer>
+         <TaskCard taskFunctions={taskFunctions} key={task.id} task={task} />
       );
-   } else {
-      // Calculate the Unix Epoch time (MS) for the amount of days out
-      const endTimeUnix = Date.now() + dayCount * ONE_DAY_MS;
-      const Tasks = filterTasks(tasks, 0, endTimeUnix).map(task => {
-         return (
-            <TaskCard taskFunctions={taskFunctions} key={task.id} task={task} />
-         );
-      });
+   });
 
-      return (
-         <TasksContainer>
-            <Controls taskFunctions={taskFunctions} title={title} />
-            {Tasks}
-         </TasksContainer>
-      );
-   }
+   return (
+      <TasksContainer>
+         <Controls taskFunctions={taskFunctions} title={title} />
+         {Tasks}
+      </TasksContainer>
+   );
+};
+
+const TasksList = ({ tasks, taskFunctions, all }) => {
+   if (all) return <AllTasks tasks={tasks} taskFunctions={taskFunctions} />;
+
+   return (
+      <TasksFilteredByDueDate tasks={tasks} taskFunctions={taskFunctions} />
+   );
 };
 
 export default TasksList;

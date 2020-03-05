@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory, useLocation } from "react-router-dom";
 import * as yup from "yup";
 
 import styled from "styled-components";
@@ -41,20 +40,24 @@ const FormSchema = yup.object().shape({
    description: yup.string("Please make sure to enter a password.")
 });
 
-const NewTaskForm = ({ taskFunctions, closeModal }) => {
+const EditTask = ({ task, taskFunctions, closeModal }) => {
    const { register, handleSubmit, errors, reset } = useForm({
       validationSchema: FormSchema,
-      mode: "onBlur"
+      mode: "onBlur",
+      defaultValues: {
+         name: task.name || "",
+         description: task.description || ""
+      }
    });
 
    const onSubmit = data => {
-      taskFunctions.addNewTask(data);
+      taskFunctions.editTask(data, task.id);
       closeModal();
    };
 
    return (
       <Form onSubmit={handleSubmit(onSubmit)}>
-         <FormHeader>What's the task?</FormHeader>
+         <FormHeader>Edit Task</FormHeader>
          <InputContainer>
             <Input
                placeholder="Name of the task"
@@ -90,7 +93,16 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
          </InputSection>
 
          <ButtonBox>
-            <FormButton variant="secondary" type="submit">
+            <FormButton
+               outline
+               width="29.5%"
+               variant="warning"
+               borderColor="#DC143C"
+               onClick={() => taskFunctions.deleteTask(task.id)}
+            >
+               Delete Task
+            </FormButton>
+            <FormButton width="69.5%" variant="secondary" type="submit">
                Add Task
             </FormButton>
          </ButtonBox>
@@ -98,4 +110,4 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
    );
 };
 
-export default NewTaskForm;
+export default EditTask;
