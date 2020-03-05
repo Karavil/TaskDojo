@@ -14,18 +14,21 @@ const defaultOptions = {
 };
 
 const LoadingContainer = styled.div`
-   padding: 20px 30px;
+   height: 70vh;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
    width: 100%;
-
    border-radius: 0 0 10px 10px;
-
    background: ${({ theme }) => theme.colors.background};
 `;
 
 const Loading = () => {
    return (
       <LoadingContainer>
-         <Lottie options={defaultOptions} height={"20%"} width={"20%"} />
+         <Lottie options={defaultOptions} height="auto" width={"27.5%"} />
       </LoadingContainer>
    );
 };

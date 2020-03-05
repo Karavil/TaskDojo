@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 import Controls from "./Controls";
 import TaskCard from "./TaskCard";
-import NoTasksAnimation from "../Animations/NoTasks";
 
 //One day in milliseconds
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
@@ -98,13 +97,6 @@ const TasksFilteredByDueDate = ({ taskFunctions, tasks }) => {
 };
 
 const TasksList = ({ tasks, taskFunctions, all }) => {
-   if (!tasks || tasks.length === 0)
-      return (
-         <TasksContainer>
-            <NoTasksAnimation taskFunctions={taskFunctions} />
-         </TasksContainer>
-      );
-
    if (all) return <AllTasks tasks={tasks} taskFunctions={taskFunctions} />;
    return (
       <TasksFilteredByDueDate tasks={tasks} taskFunctions={taskFunctions} />

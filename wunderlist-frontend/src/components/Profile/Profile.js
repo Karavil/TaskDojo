@@ -79,7 +79,9 @@ const Profile = () => {
       axiosWithAuth()
          .get("/profile")
          .then(res => {
-            setProfile(res.data.profile[res.data.profile.length - 1]);
+            if (res.data.length >= 0) {
+               setProfile(res.data.profile[res.data.profile.length - 1]);
+            }
          })
          .catch(err => {
             console.log(err);

@@ -9,6 +9,7 @@ import DateButtons from "./DateButtons";
 import styled from "styled-components";
 import Container from "../../styles/Container";
 import LoadingAnimation from "../Animations/Loading";
+import NoTasksAnimation from "../Animations/NoTasks";
 
 const Tasks = () => {
    const [tasks, setTasks] = useState([]);
@@ -41,7 +42,7 @@ const Tasks = () => {
          .then(() => {
             setTimeout(() => {
                setLoading(false);
-            }, 2000);
+            }, 1200);
          });
    }, []);
 
@@ -134,7 +135,10 @@ const Tasks = () => {
       <Container flexDirection="column">
          <DateButtons />
          {loading && <LoadingAnimation />}
-         {!loading && (
+         {tasks.length === 0 && !loading && (
+            <NoTasksAnimation taskFunctions={taskFunctions} />
+         )}
+         {tasks.length > 0 && !loading && (
             <Switch>
                <Route path="/tasks/days/:daysOut">
                   <TasksList taskFunctions={taskFunctions} tasks={tasks} />

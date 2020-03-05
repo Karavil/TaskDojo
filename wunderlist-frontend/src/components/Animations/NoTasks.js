@@ -20,7 +20,7 @@ const defaultOptions = {
 
 const FirstTaskButton = styled(Button)`
    width: 30%;
-   margin: 10px 0;
+   margin: 30px 0 0;
 
    font-weight: 600;
 `;
@@ -28,8 +28,14 @@ const Content = styled.section`
    display: flex;
    flex-direction: column;
    align-items: center;
-   padding-top: 5vh;
-   padding-bottom: 10vh;
+   justify-content: center;
+
+   height: 70vh;
+   padding-bottom: 7.5vh;
+
+   width: 100%;
+   border-radius: 0 0 10px 10px;
+   background: ${({ theme }) => theme.colors.background};
 
    h2 {
       text-align: center;
@@ -42,6 +48,7 @@ const Content = styled.section`
       font-size: 1.1rem;
    }
 `;
+
 const NoTasks = ({ taskFunctions }) => {
    const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -56,12 +63,13 @@ const NoTasks = ({ taskFunctions }) => {
    return (
       <>
          <Content>
-            <Lottie options={defaultOptions} height={"40%"} width={"40%"} />
-            <h2>Conquer time management today. Start by creating a task!</h2>
-            <p>
-               Your tasks are synchronized across all devices, on any platform
-               with internet access.
-            </p>
+            <Lottie options={defaultOptions} height={"auto"} width={"500px"} />
+
+            <h2>
+               You don't have any tasks. Got some goals in mind? It's time to
+               start now!
+            </h2>
+            <p>Your tasks are synchronized across all devices and platforms.</p>
             <FirstTaskButton onClick={openModal} variant="secondary">
                Create Task
             </FirstTaskButton>
