@@ -6,9 +6,6 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Alert } from "@smooth-ui/core-sc";
 
-import axios from "axios";
-import { BASE_API_URL } from "../../utils/Constants";
-
 import {
    Form,
    Input,
@@ -25,16 +22,15 @@ const StyledProfileForm = styled(Form)`
 
 //Yup form validation
 const FormSchema = yup.object().shape({
-   first_name: yup.string().required("Please enter an email for your account."),
-   last_name: yup.string().required("Please make sure to enter a last_name."),
+   first_name: yup.string().required("Please enter your first name."),
+   last_name: yup.string().required("Please enter your last name."),
    occupation: yup.string(),
-   age: yup.number("Please make sure to enter a number for your age.")
+   age: yup.string().notRequired()
 });
 
 const ProfileForm = props => {
    const { register, handleSubmit, errors, reset } = useForm({
-      validationSchema: FormSchema,
-      mode: "onBlur"
+      validationSchema: FormSchema
    });
 
    return (

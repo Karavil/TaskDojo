@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 
@@ -87,7 +87,7 @@ const LogOutButton = styled(Button)`
    border: none;
 `;
 
-const NavBar = () => {
+const NavBar = ({ loggedIn }) => {
    const logOut = () => {
       localStorage.removeItem("AUTH_TOKEN");
       window.location.replace("https://wunderlist7.netlify.com/");
@@ -102,9 +102,12 @@ const NavBar = () => {
                </h2>
             </LogoLink>
             <UserProfile>
-               <LogOutButton outline variant="secondary" onClick={logOut}>
-                  Log Out
-               </LogOutButton>
+               {loggedIn && (
+                  <LogOutButton outline variant="secondary" onClick={logOut}>
+                     Log Out
+                  </LogOutButton>
+               )}
+
                <Link to="/profile">
                   <ProfileIcon />
                </Link>

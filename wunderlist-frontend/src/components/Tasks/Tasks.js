@@ -92,14 +92,13 @@ const Tasks = () => {
          });
    };
 
-   const toggleCompleted = (taskData, taskID) => {
-      taskData.completed = !taskData.completed;
-      editTask(taskData, taskID);
+   const toggleCompleted = task => {
+      task.completed = !task.completed;
+      editTask(task, task.id, true);
    };
 
-   const editTask = (data, taskID) => {
-      console.log("Editing", data);
-      if (data.due_date && typeof data.due_date === "string") {
+   const editTask = (data, taskID, dateIsEpoch = false) => {
+      if (!dateIsEpoch) {
          data.due_date = parseDateString(data.due_date);
       }
       console.log("EDITED", data);
@@ -109,7 +108,7 @@ const Tasks = () => {
             description: data.description || "",
             timestamp: Date.now(),
             completed: data.completed || false,
-            due_date: data.due_date
+            due_date: data.due_date || null
          })
          .then(res => {
             setTasks(tasks =>
@@ -138,7 +137,47 @@ const Tasks = () => {
       toggleCompleted: toggleCompleted
    };
 
-   console.log(tasks);
+   const descendingByDueDate = (a, b) => {
+      if (!a.due_date) {
+         return -1;
+      }
+      if (!b.due_date) {
+         return 1;
+      }
+      if (a.due_date < b.due_date) {
+         return -1;
+      }
+      return 1;
+   };
+
+   const completedAtTop = (a, b) => {
+      if (a.completed && b.completed) {
+         return 0;
+      }
+      if (a.completed) {
+         return -1;
+      }
+      if (b.completed) {
+         return 1;
+      }
+
+      return 0;
+   };
+
+   const overDueFirst = (a, b) => {
+      if (a.overdue && b.overdue) {
+         return 0;
+      }
+      if (a.overdue) {
+         return -1;
+      }
+      if (b.overdue) {
+         return 1;
+      }
+      return 0;
+   };
+
+   tasks.sort(completedAtTop);
    return (
       <Container flexDirection="column">
          <DateButtons />

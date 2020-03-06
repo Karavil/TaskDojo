@@ -19,6 +19,7 @@ export const Input = styled(SmoothInput)`
    width: 100%;
    border: 1px solid ${({ theme }) => theme.colors.secondary};
    background-color: white;
+   margin: 0 0 5px;
 
    &:focus {
       border-color: ${({ theme }) => theme.colors.secondary};

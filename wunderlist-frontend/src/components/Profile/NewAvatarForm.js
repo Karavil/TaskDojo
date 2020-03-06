@@ -16,9 +16,11 @@ const StyledDropzone = styled.section`
    justify-content: center;
    align-items: center;
 
-   h2 {
+   padding: 30px;
+
+   h3 {
       color: ${({ theme }) => theme.colors.primary};
-      font-weight: 500;
+      font-weight: 400;
    }
 `;
 function MyDropzone(props) {
@@ -36,7 +38,9 @@ function MyDropzone(props) {
          {isDragActive ? (
             <h2>Drop it here...</h2>
          ) : (
-            <h2>Drag 'n' drop your avatar here, or click to select files.</h2>
+            <h3>
+               Drag 'n' drop your avatar here, or click to select an image file.
+            </h3>
          )}
       </StyledDropzone>
    );

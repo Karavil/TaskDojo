@@ -70,7 +70,6 @@ const DelButton = styled(Button)`
 `;
 
 const ProfileSwitch = ({ profile, profileFunctions }) => {
-   console.log("profile", profile);
    if (profile && Object.keys(profile).length >= 2) {
       return (
          <>
@@ -100,6 +99,7 @@ const ProfileSwitch = ({ profile, profileFunctions }) => {
 
 const Profile = () => {
    const [profile, setProfile] = useState({});
+   const [updated, setUpdated] = useState(false);
    const [loading, setLoading] = useState(false);
 
    useEffect(() => {
@@ -116,8 +116,11 @@ const Profile = () => {
          })
          .catch(err => {
             console.log(err);
+         })
+         .then(() => {
+            setUpdated(false);
          });
-   }, []);
+   }, [updated]);
 
    const createProfile = user => {
       axiosWithAuth()
@@ -129,7 +132,7 @@ const Profile = () => {
          })
          .then(res => {
             console.log("Created profile:", res.data);
-            setProfile(res.data.profile);
+            setUpdated(true);
          })
          .catch(err => {
             console.log("Profile post error:", err);

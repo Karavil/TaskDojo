@@ -90,7 +90,7 @@ function App() {
          <GlobalStyle />
 
          <AppContainer>
-            <NavBar />
+            <NavBar loggedIn={true} />
 
             <PrivateRoute path="/tasks" component={Tasks} />
             <Route path="/tasks">

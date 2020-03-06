@@ -23,7 +23,7 @@ const FormSchema = yup.object().shape({
    password: yup.string().required("Please make sure to enter a password.")
 });
 
-const LoginForm = props => {
+const LoginForm = () => {
    const { register, handleSubmit, errors, reset } = useForm({
       validationSchema: FormSchema,
       mode: "onBlur"

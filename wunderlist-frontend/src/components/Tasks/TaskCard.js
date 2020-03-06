@@ -95,12 +95,12 @@ const TaskCheckbox = ({ completed, onClick }) => {
 
 const TaskDueDate = ({ dueDate, completed }) => {
    let overdue = false;
-   if (dueDate < Date.now()) {
+   if (dueDate && dueDate <= Date.now()) {
       overdue = true;
    }
    if (overdue && !completed) {
       const overDueTime = Date.now() - dueDate;
-      const overDueDays = Math.floor(overDueTime / 86400000);
+      const overDueDays = Math.ceil(overDueTime / 86400000);
       return (
          <DueAlert overdue={overdue.toString()}>
             {`Overdue by ${overDueDays} ${overDueDays === 1 ? "day" : "days"}`}
@@ -119,6 +119,7 @@ const TaskCard = ({ task, taskFunctions }) => {
    const [taskComplete, setTaskComplete] = useState(task.completed);
 
    function openModal() {
+      console.log("Modal opening:", task);
       setIsOpen(true);
    }
 
@@ -128,7 +129,8 @@ const TaskCard = ({ task, taskFunctions }) => {
 
    const checkboxOnClick = e => {
       e.stopPropagation();
-      taskFunctions.toggleCompleted(task, task.id);
+      console.log("CHECKBOX", task);
+      taskFunctions.toggleCompleted(task);
       setTaskComplete(taskComplete => !taskComplete);
    };
 
