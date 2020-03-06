@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import { Button } from "@smooth-ui/core-sc";
-import { FaUserCircle } from "react-icons/fa";
 import Container from "../../styles/Container";
 
 import LoadingAnimation from "../Animations/Loading";
 
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+
+import Avatar from "./Avatar";
+import ProfileForm from "./ProfileForm";
 
 const StyledProfile = styled.section`
    background-color: ${({ theme }) => theme.colors.primary};
@@ -33,23 +35,7 @@ const CurrentInfo = styled.div`
    }
 `;
 
-const AvatarInfo = styled.section`
-   display: flex;
-`;
-
 const ProfileInfo = styled.section``;
-
-const DefaultAvatar = styled(FaUserCircle)`
-   fill: ${({ theme }) => theme.colors.secondary};
-   font-size: 8.5rem;
-   margin: 0 20px;
-`;
-
-const AvatarButtons = styled.div`
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-`;
 
 const ProfileTab = styled.div`
    height: 54px;
@@ -72,6 +58,46 @@ const ProfileTab = styled.div`
    }
 `;
 
+const StyledNoProfile = styled.div`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+`;
+
+const DelButton = styled(Button)`
+   margin: 12.5px 0;
+`;
+
+const ProfileSwitch = ({ profile, profileFunctions }) => {
+   console.log("profile", profile);
+   if (profile && Object.keys(profile).length >= 2) {
+      return (
+         <>
+            <ProfileInfo>
+               <h1>{`${profile.first_name} ${profile.last_name}`}</h1>
+               {profile.occupation && <p>Occupation: {profile.occupation}</p>}
+               {profile.age && <p>Age: {profile.age}</p>}
+               <DelButton
+                  onClick={profileFunctions.deleteProfile}
+                  outline
+                  variant="warning"
+               >
+                  Delete Profile Information
+               </DelButton>
+            </ProfileInfo>
+            <Avatar />
+         </>
+      );
+   } else {
+      return (
+         <StyledNoProfile>
+            <ProfileForm createProfile={profileFunctions.createProfile} />
+         </StyledNoProfile>
+      );
+   }
+};
+
 const Profile = () => {
    const [profile, setProfile] = useState({});
    const [loading, setLoading] = useState(false);
@@ -82,7 +108,7 @@ const Profile = () => {
          .get("/profile")
          .then(res => {
             if (res.data.profile.length >= 0) {
-               setProfile(res.data.profile[1]);
+               setProfile(res.data.profile[0]);
             }
             setTimeout(() => {
                setLoading(false);
@@ -112,7 +138,7 @@ const Profile = () => {
 
    const editProfile = user => {
       axiosWithAuth()
-         .put("/profile/1", {
+         .put("/profile/" + profile.id, {
             ...profile,
             ...user
          })
@@ -131,9 +157,10 @@ const Profile = () => {
          });
    };
 
-   const deleteProfile = userData => {
+   const deleteProfile = () => {
+      console.log(profile.id);
       axiosWithAuth()
-         .delete("/delete/1")
+         .delete("/profile/" + profile.id)
          .then(res => {
             console.log("Deleted profile:", res.data);
             setProfile({});
@@ -143,7 +170,12 @@ const Profile = () => {
          });
    };
 
-   console.log(profile);
+   const profileFunctions = {
+      createProfile: createProfile,
+      editProfile: editProfile,
+      deleteProfile: deleteProfile
+   };
+
    return (
       <Container flexDirection="column">
          <ProfileTab>
@@ -153,25 +185,10 @@ const Profile = () => {
          {!loading && (
             <StyledProfile>
                <CurrentInfo>
-                  <ProfileInfo>
-                     <h1>{`${profile.first_name} ${profile.last_name}`}</h1>
-                     <p>Occupation: {profile.occupation || "Unknown"}</p>
-                     {profile.age && <p>{profile.age} years old</p>}
-                  </ProfileInfo>
-                  <AvatarInfo>
-                     <DefaultAvatar />
-                     <AvatarButtons>
-                        <Button outline variant="secondary">
-                           Change Avatar
-                        </Button>
-                        <Button outline variant="secondary">
-                           Upload Avatar
-                        </Button>
-                        <Button outline variant="warning">
-                           Delete Avatar
-                        </Button>
-                     </AvatarButtons>
-                  </AvatarInfo>
+                  <ProfileSwitch
+                     profile={profile}
+                     profileFunctions={profileFunctions}
+                  />
                </CurrentInfo>
             </StyledProfile>
          )}

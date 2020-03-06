@@ -77,7 +77,7 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
             <InputContainer>
                <Input
                   placeholder="Description"
-                  type="text"
+                  type="textarea"
                   name="description"
                   ref={register}
                />
