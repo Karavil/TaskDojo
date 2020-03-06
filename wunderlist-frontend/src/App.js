@@ -43,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
          display: none;
       }
    }
+
+   button {
+      z-index: 0 !important;
+   }
 `;
 
 const AppContainer = styled.div`

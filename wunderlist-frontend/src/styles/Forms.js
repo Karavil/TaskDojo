@@ -29,6 +29,7 @@ export const TextArea = styled(SmoothTextarea)`
    width: 100%;
    border: 1px solid ${({ theme }) => theme.colors.secondary};
    background-color: white;
+   height: 40px;
 
    &:focus {
       border-color: ${({ theme }) => theme.colors.secondary};

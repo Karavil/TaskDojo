@@ -7,6 +7,7 @@ import { Alert } from "@smooth-ui/core-sc";
 import {
    Form,
    Input,
+   TextArea,
    CalendarInput,
    InputDiv as InputContainer,
    ButtonBox,
@@ -75,7 +76,7 @@ const NewTaskForm = ({ taskFunctions, closeModal }) => {
          <InputSection>
             <DescriptionIcon />
             <InputContainer>
-               <Input
+               <TextArea
                   placeholder="Description"
                   type="textarea"
                   name="description"

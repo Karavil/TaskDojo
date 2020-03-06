@@ -1,52 +1,45 @@
-// import React from "react";
-// import * as yup from "yup";
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 
-// import {
-//    Form,
-//    Input,
-//    InputDiv as InputContainer,
-//    ButtonBox,
-//    FormButton,
-//    FormHeader
-// } from "../../styles/Forms";
+import styled from "styled-components";
 
-// // Yup form validation
-// const FormSchema = yup.object().shape({
-//    image: yup.string().required("Please upload an image for your avatar")
-// });
+const StyledDropzone = styled.section`
+   width: 40vw;
+   height: 20vh;
 
-// const NewAvatarForm = props => {
-//    const { register, handleSubmit, errors } = useForm({
-//       validationSchema: FormSchema,
-//       defaultValues: {
-//          task: task.task || "",
-//          description: task.description || "",
-//          due_date: formatEpoch(task.due_date)
-//       }
-//    });
+   background: ${({ theme }) => theme.colors.secondary};
+   border: 2px solid;
+   border-color: ${({ theme }) => theme.colors.primary};
+   border-radius: 15px;
 
-//    return (
-//       <Form onSubmit={handleSubmit()}>
-//          <FormHeader>Upload Avatar Image</FormHeader>
-//          <InputContainer>
-//             <Input
-//                placeholder="Name of the task"
-//                type="text"
-//                name="task"
-//                ref={register}
-//             />
-//             {errors.image && (
-//                <Alert variant="danger">{errors.image.message}</Alert>
-//             )}
-//          </InputContainer>
+   display: flex;
+   justify-content: center;
+   align-items: center;
 
-//          <ButtonBox>
-//             <FormButton variant="secondary" type="submit">
-//                Submit
-//             </FormButton>
-//          </ButtonBox>
-//       </Form>
-//    );
-// };
+   h2 {
+      color: ${({ theme }) => theme.colors.primary};
+      font-weight: 500;
+   }
+`;
+function MyDropzone(props) {
+   const onDrop = useCallback(acceptedFiles => {
+      console.log(acceptedFiles[0]);
+      props.uploadAvatar(acceptedFiles[0]);
+   }, []);
+   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+      onDrop
+   });
 
-// export default NewAvatarForm;
+   return (
+      <StyledDropzone {...getRootProps()}>
+         <input {...getInputProps()} />
+         {isDragActive ? (
+            <h2>Drop it here...</h2>
+         ) : (
+            <h2>Drag 'n' drop your avatar here, or click to select files.</h2>
+         )}
+      </StyledDropzone>
+   );
+}
+
+export default MyDropzone;

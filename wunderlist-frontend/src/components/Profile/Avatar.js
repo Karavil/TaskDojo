@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
-import { BASE_API_URL } from "../../utils/Constants";
 
 import styled from "styled-components";
 import { Button } from "@smooth-ui/core-sc";
@@ -29,12 +28,16 @@ const AvatarButtons = styled.div`
 const AvatarImage = styled.img`
    width: 145px;
    height: auto;
-   margin: -5px 15px;
+   margin: -2px 15px;
    border-radius: 50%;
+
+   border: 2px solid;
+   border-color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Avatar = () => {
    const [avatarURL, setAvatarURL] = useState(null);
+   const [avatarUpdated, setUpdated] = useState(false);
    const [modalIsOpen, setIsOpen] = useState(false);
 
    function openModal() {
@@ -45,15 +48,46 @@ const Avatar = () => {
       setIsOpen(false);
    }
 
-   const uploadAvatar = () => {
+   useEffect(() => {
       axiosWithAuth()
-         .post("/avatar")
+         .get("/avatar")
          .then(res => {
-            console.log("Created profile:", res.data);
-            setAvatarURL(res.data);
+            setAvatarURL(res.data.avatar[res.data.avatar.length - 1].url);
+         })
+         .catch(err => {});
+      return () => {};
+   }, [avatarUpdated]);
+
+   const uploadAvatar = image => {
+      var formData = new FormData();
+      formData.append("image", image);
+      console.log("uploading", image);
+
+      axiosWithAuth()
+         .post("/avatar/upload", formData, {
+            headers: {
+               "Content-Type": "multipart/form-data"
+            }
+         })
+         .then(res => {
+            console.log("Created avatar:", res.data);
+            setUpdated(true);
+            closeModal();
          })
          .catch(err => {
             console.log("Avatar post error:", err);
+         });
+   };
+
+   const changeAvatar = () => {
+      axiosWithAuth()
+         .put("/avatar")
+         .then(res => {
+            console.log("Changed Avatar :", res.data);
+            setAvatarURL(res.data);
+         })
+         .catch(err => {
+            console.log("Avatar change error:", err);
          });
    };
 
@@ -77,23 +111,24 @@ const Avatar = () => {
             )}
             {!avatarURL && <DefaultAvatar />}
             <AvatarButtons>
-               <Button outline variant="secondary">
-                  Change Avatar
-               </Button>
-               <Button outline variant="secondary">
+               <Button onClick={openModal} outline variant="secondary">
                   Upload Avatar
                </Button>
-               <Button outline variant="warning">
+               <Button onClick={openModal} outline variant="secondary">
+                  Change Avatar
+               </Button>
+               <Button onClick={deleteAvatar} outline variant="warning">
                   Delete Avatar
                </Button>
             </AvatarButtons>
          </AvatarInfo>
+
          <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={ModalStyle}
          >
-            <NewAvatarForm />
+            <NewAvatarForm uploadAvatar={uploadAvatar} />
          </Modal>
       </>
    );
