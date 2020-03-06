@@ -93,12 +93,12 @@ const TaskCheckbox = ({ completed, onClick }) => {
    );
 };
 
-const TaskDueDate = ({ dueDate }) => {
+const TaskDueDate = ({ dueDate, completed }) => {
    let overdue = false;
    if (dueDate < Date.now()) {
       overdue = true;
    }
-   if (overdue) {
+   if (overdue && !completed) {
       const overDueTime = Date.now() - dueDate;
       const overDueDays = Math.floor(overDueTime / 86400000);
       return (
@@ -127,7 +127,6 @@ const TaskCard = ({ task, taskFunctions }) => {
    }
 
    const checkboxOnClick = e => {
-      console.log(e);
       e.stopPropagation();
       taskFunctions.toggleCompleted(task, task.id);
       setTaskComplete(taskComplete => !taskComplete);
@@ -156,7 +155,12 @@ const TaskCard = ({ task, taskFunctions }) => {
             </Left>
             <Right>
                {Tags}
-               {task.due_date && <TaskDueDate dueDate={task.due_date} />}
+               {task.due_date && (
+                  <TaskDueDate
+                     completed={task.completed}
+                     dueDate={task.due_date}
+                  />
+               )}
             </Right>
          </StyledTaskCard>
          <Modal

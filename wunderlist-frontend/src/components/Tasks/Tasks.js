@@ -97,15 +97,19 @@ const Tasks = () => {
       editTask(taskData, taskID);
    };
 
-   const editTask = (formData, taskID) => {
-      console.log(taskID);
+   const editTask = (data, taskID) => {
+      console.log("Editing", data);
+      if (data.due_date && typeof data.due_date === "string") {
+         data.due_date = parseDateString(data.due_date);
+      }
+      console.log("EDITED", data);
       axiosWithAuth()
          .put("/tasks/" + taskID, {
-            task: formData.task || "",
-            description: formData.description || "",
+            task: data.task || "",
+            description: data.description || "",
             timestamp: Date.now(),
-            completed: formData.completed || false,
-            due_date: parseDateString(formData.due_date)
+            completed: data.completed || false,
+            due_date: data.due_date
          })
          .then(res => {
             setTasks(tasks =>
