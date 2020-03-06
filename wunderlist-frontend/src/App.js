@@ -56,7 +56,7 @@ function App() {
    const [theme, setTheme] = useState({
       colors: {
          primary: "white",
-         secondary: "#502E88",
+         secondary: localStorage.getItem("THEME_COLOR") || "#502E88",
 
          background: "white",
          contrast: "black",
@@ -76,6 +76,7 @@ function App() {
    const setColorTheme = colorCode => {
       let newTheme = { ...theme };
       newTheme.colors.secondary = colorCode;
+      localStorage.setItem("THEME_COLOR", colorCode);
       setTheme(newTheme);
    };
 

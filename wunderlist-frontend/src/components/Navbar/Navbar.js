@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 
 import Container from "../../styles/Container";
+import { Button } from "@smooth-ui/core-sc";
 
 import { FaUserCircle } from "react-icons/fa";
 
@@ -64,14 +65,13 @@ const LogoLink = styled(NavLink)`
 
 // Account buttons, login/register (on right)
 const UserProfile = styled.div`
-   justify-self: flex-end;
-
    display: flex;
    justify-content: flex-end;
+   align-items: center;
 `;
 
 const ProfileIcon = styled(FaUserCircle)`
-   font-size: 2rem;
+   font-size: 2.5rem;
    color: ${({ theme }) => theme.colors.secondary};
 
    &:hover {
@@ -79,7 +79,20 @@ const ProfileIcon = styled(FaUserCircle)`
    }
 `;
 
+const LogOutButton = styled(Button)`
+   margin: 0 10px;
+   padding: 0 1rem;
+   height: 35px;
+
+   border: none;
+`;
+
 const NavBar = () => {
+   const logOut = () => {
+      localStorage.removeItem("AUTH_TOKEN");
+      window.location.replace("https://wunderlist7.netlify.com/");
+   };
+
    return (
       <StyledNav>
          <NavContainer>
@@ -89,6 +102,9 @@ const NavBar = () => {
                </h2>
             </LogoLink>
             <UserProfile>
+               <LogOutButton outline variant="secondary" onClick={logOut}>
+                  Log Out
+               </LogOutButton>
                <Link to="/profile">
                   <ProfileIcon />
                </Link>

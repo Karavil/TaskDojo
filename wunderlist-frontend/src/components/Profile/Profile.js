@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
-import Container from "../../styles/Container";
 import { Button } from "@smooth-ui/core-sc";
 import { FaUserCircle } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
+import Container from "../../styles/Container";
+
+import LoadingAnimation from "../Animations/Loading";
 
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
@@ -73,44 +74,57 @@ const ProfileTab = styled.div`
 
 const Profile = () => {
    const [profile, setProfile] = useState({});
-
-   const [updated, setUpdated] = useState(false);
-   const history = useHistory();
+   const [loading, setLoading] = useState(false);
 
    useEffect(() => {
+      setLoading(true);
       axiosWithAuth()
          .get("/profile")
          .then(res => {
-            if (res.data.length >= 0) {
-               setProfile(res.data.profile[res.data.profile.length - 1]);
+            if (res.data.profile.length >= 0) {
+               setProfile(res.data.profile[1]);
             }
+            setTimeout(() => {
+               setLoading(false);
+            }, 1000);
          })
          .catch(err => {
             console.log(err);
          });
-   }, [updated]);
+   }, []);
 
-   const createProfile = userData => {
+   const createProfile = user => {
       axiosWithAuth()
          .post("/profile", {
-            first_name: "First",
-            last_name: "Name",
-            age: 25,
-            occupation: "Developer"
+            first_name: user.first_name || "",
+            last_name: user.last_name || "",
+            age: user.age || null,
+            occupation: user.occupation || ""
          })
          .then(res => {
-            setUpdated(true);
+            console.log("Created profile:", res.data);
+            setProfile(res.data.profile);
          })
          .catch(err => {
             console.log("Profile post error:", err);
          });
    };
 
-   const editProfile = userData => {
+   const editProfile = user => {
       axiosWithAuth()
-         .put("/profile/1")
+         .put("/profile/1", {
+            ...profile,
+            ...user
+         })
          .then(res => {
-            setUpdated(true);
+            setProfile(profile => {
+               const newProfile = {
+                  ...profile,
+                  ...res.data.newProfile
+               };
+               console.log("new", newProfile);
+               return newProfile;
+            });
          })
          .catch(err => {
             console.log("Profile put error:", err);
@@ -119,56 +133,48 @@ const Profile = () => {
 
    const deleteProfile = userData => {
       axiosWithAuth()
-         .delete("/delete/2")
+         .delete("/delete/1")
          .then(res => {
-            setProfile(res.userData);
+            console.log("Deleted profile:", res.data);
+            setProfile({});
          })
          .catch(err => {
             console.log("Profile delete error", err);
          });
    };
 
-   const signOut = () => {
-      localStorage.removeItem("AUTH_TOKEN");
-      localStorage.removeItem("USER_ID");
-      history.push("/login");
-   };
-
-   createProfile();
+   console.log(profile);
    return (
       <Container flexDirection="column">
          <ProfileTab>
             <span>Profile Information</span>
          </ProfileTab>
-         <StyledProfile>
-            <CurrentInfo>
-               <ProfileInfo>
-                  <h1>
-                     {profile.first_name && `${profile.first_name}`}
-                     {profile.last_name && ` ${profile.last_name}`}
-                  </h1>
-                  {profile.occupation && <p>{profile.occupation}</p>}
-                  {profile.age && <p>{profile.age} years old</p>}
-               </ProfileInfo>
-               <AvatarInfo>
-                  <DefaultAvatar />
-                  <AvatarButtons>
-                     <Button outline variant="secondary">
-                        Change Avatar
-                     </Button>
-                     <Button outline variant="secondary">
-                        Upload Avatar
-                     </Button>
-                     <Button outline variant="warning">
-                        Delete Avatar
-                     </Button>
-                     <Button onClick={signOut} outline variant="secondary">
-                        Sign Out
-                     </Button>
-                  </AvatarButtons>
-               </AvatarInfo>
-            </CurrentInfo>
-         </StyledProfile>
+         {loading && <LoadingAnimation />}
+         {!loading && (
+            <StyledProfile>
+               <CurrentInfo>
+                  <ProfileInfo>
+                     <h1>{`${profile.first_name} ${profile.last_name}`}</h1>
+                     <p>Occupation: {profile.occupation || "Unknown"}</p>
+                     {profile.age && <p>{profile.age} years old</p>}
+                  </ProfileInfo>
+                  <AvatarInfo>
+                     <DefaultAvatar />
+                     <AvatarButtons>
+                        <Button outline variant="secondary">
+                           Change Avatar
+                        </Button>
+                        <Button outline variant="secondary">
+                           Upload Avatar
+                        </Button>
+                        <Button outline variant="warning">
+                           Delete Avatar
+                        </Button>
+                     </AvatarButtons>
+                  </AvatarInfo>
+               </CurrentInfo>
+            </StyledProfile>
+         )}
       </Container>
    );
 };
