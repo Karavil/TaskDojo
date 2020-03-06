@@ -54,7 +54,9 @@ const Avatar = () => {
          .then(res => {
             setAvatarURL(res.data.avatar[res.data.avatar.length - 1].url);
          })
-         .catch(err => {});
+         .catch(err => {
+            console.log(err);
+         });
       return () => {};
    }, [avatarUpdated]);
 
