@@ -10,7 +10,10 @@ export const Form = styled.form`
    padding: 30px 50px;
 
    background: ${({ theme }) => theme.colors.primary};
-   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+   box-shadow: ${props =>
+      props.shadow
+         ? `0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)`
+         : `none`};
 
    border-radius: 5px;
 `;

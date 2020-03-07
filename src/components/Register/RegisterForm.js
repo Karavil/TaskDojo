@@ -52,7 +52,7 @@ const RegisterForm = props => {
    const history = useHistory();
 
    return (
-      <Form onSubmit={handleSubmit(onRegisterSubmit)}>
+      <Form shadow={false} onSubmit={handleSubmit(onRegisterSubmit)}>
          <FormHeader>Register</FormHeader>
          <InputDiv>
             <Input
