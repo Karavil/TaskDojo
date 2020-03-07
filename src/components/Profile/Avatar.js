@@ -15,8 +15,10 @@ const AvatarInfo = styled.section`
 
 const DefaultAvatar = styled(FaUserCircle)`
    fill: ${({ theme }) => theme.colors.secondary};
-   font-size: 8.5rem;
-   margin: 0 20px;
+
+   margin: 0 15px;
+   width: 145px;
+   height: 145px;
 `;
 
 const AvatarButtons = styled.div`
@@ -27,9 +29,11 @@ const AvatarButtons = styled.div`
 
 const AvatarImage = styled.img`
    width: 145px;
-   height: auto;
-   margin: -2px 15px;
+   height: 145px;
+   margin: 0 15px;
    border-radius: 50%;
+
+   background-color: ${({ theme }) => theme.colors.secondary};
 
    border: 2px solid;
    border-color: ${({ theme }) => theme.colors.secondary};

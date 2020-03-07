@@ -9,6 +9,7 @@ const defaultOptions = {
    loop: true,
    autoplay: true,
    animationData: LoadingTasks,
+   isClickToPauseDisabled: true,
    rendererSettings: {
       preserveAspectRatio: "xMidYMid slice"
    }
@@ -26,7 +27,12 @@ const LoadingContainer = styled(InsideContainer)`
 const Loading = () => {
    return (
       <LoadingContainer>
-         <Lottie options={defaultOptions} width={"400px"} height={"auto"} />
+         <Lottie
+            isClickToPauseDisabled={true}
+            options={defaultOptions}
+            width={"400px"}
+            height={"auto"}
+         />
       </LoadingContainer>
    );
 };

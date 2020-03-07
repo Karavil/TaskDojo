@@ -62,7 +62,12 @@ const NoTasks = ({ taskFunctions }) => {
    return (
       <>
          <Content>
-            <Lottie options={defaultOptions} height={"auto"} width={"500px"} />
+            <Lottie
+               isClickToPauseDisabled={true}
+               options={defaultOptions}
+               height={"auto"}
+               width={"500px"}
+            />
 
             <h2>
                You don't have any tasks. Got some goals in mind? It's time to
