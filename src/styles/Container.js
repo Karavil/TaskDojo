@@ -13,6 +13,7 @@ export const InsideContainer = styled.div`
    border-radius: 0 0 10px 10px;
 
    background: ${({ theme }) => theme.colors.background};
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.03), 0 3px 6px rgba(0, 0, 0, 0.05);
 `;
 
 export default Container;

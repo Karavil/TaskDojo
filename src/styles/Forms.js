@@ -9,10 +9,10 @@ export const Form = styled.form`
    width: 650px;
    padding: 30px 50px;
 
-   border: 2px solid ${({ theme }) => theme.colors.secondary};
    background: ${({ theme }) => theme.colors.primary};
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
-   border-radius: 15px;
+   border-radius: 5px;
 `;
 
 export const Input = styled(SmoothInput)`
