@@ -17,6 +17,8 @@ const StyledTaskCard = styled.div`
    justify-content: space-between;
    align-items: center;
 
+   opacity: ${props => (props.completed ? "0.3" : "1")};
+
    padding: 8px 20px;
    margin: 20px 0;
 
@@ -144,7 +146,7 @@ const TaskCard = ({ task, taskFunctions }) => {
 
    return (
       <>
-         <StyledTaskCard onClick={openModal}>
+         <StyledTaskCard completed={task.completed} onClick={openModal}>
             <Left>
                <TaskCheckbox
                   completed={taskComplete}

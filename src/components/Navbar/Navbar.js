@@ -5,6 +5,7 @@ import { NavLink, Link } from "react-router-dom";
 import Container from "../../styles/Container";
 import { Button } from "@smooth-ui/core-sc";
 
+import logo from "../../assets/dojo-logo.png";
 import { FaUserCircle } from "react-icons/fa";
 
 // Main divs
@@ -54,8 +55,16 @@ const LogoLink = styled(NavLink)`
       margin: 0;
    }
 
+   img {
+      height: 30px;
+      padding: 0 7px 0 0;
+      border-right: 1px solid;
+      border-color: ${({ theme }) => `${theme.colors.dark}50`};
+   }
+
    h2 {
       color: ${({ theme }) => theme.colors.secondary};
+      margin: 0 7px;
    }
 
    span {
@@ -97,8 +106,9 @@ const NavBar = ({ loggedIn }) => {
       <StyledNav>
          <NavContainer>
             <LogoLink to="/tasks">
+               <img src={logo} alt="Dragon with multiple colors" />
                <h2>
-                  task<span>dōjō</span>
+                  <span>task</span>dōjō
                </h2>
             </LogoLink>
             <UserProfile>

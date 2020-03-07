@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import Lottie from "react-lottie";
+import { InsideContainer } from "../../styles/Container.js";
 import LoadingTasks from "../../assets/loading-tasks.json";
 
 const defaultOptions = {
@@ -13,22 +14,19 @@ const defaultOptions = {
    }
 };
 
-const LoadingContainer = styled.div`
+const LoadingContainer = styled(InsideContainer)`
    height: 70vh;
-
+   padding: 0;
    display: flex;
    justify-content: center;
    align-items: center;
-
-   width: 100%;
-   border-radius: 0 0 10px 10px;
-   background: ${({ theme }) => theme.colors.background};
+   overflow: hidden;
 `;
 
 const Loading = () => {
    return (
       <LoadingContainer>
-         <Lottie options={defaultOptions} height="auto" width={"27.5%"} />
+         <Lottie options={defaultOptions} width={"400px"} height={"auto"} />
       </LoadingContainer>
    );
 };

@@ -29,13 +29,13 @@ const FormSchema = yup.object().shape({
 });
 
 const ProfileForm = props => {
-   const { register, handleSubmit, errors, reset } = useForm({
+   const { register, handleSubmit, errors } = useForm({
       validationSchema: FormSchema
    });
 
    return (
       <StyledProfileForm onSubmit={handleSubmit(props.createProfile)}>
-         <FormHeader>Create a Wunderlist Profile</FormHeader>
+         <FormHeader>Create a dōjō profile!</FormHeader>
          <InputDiv>
             <Input
                placeholder="First Name"

@@ -21,7 +21,10 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
    }
 
-
+   html {
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+   }
 
    h1,h2,h3,h4,h5,h6{
       letter-spacing: 0.6px;

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@smooth-ui/core-sc";
 import Container from "../../styles/Container";
+import { InsideContainer } from "../../styles/Container";
 
 import LoadingAnimation from "../Animations/Loading";
 
@@ -11,12 +12,8 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import Avatar from "./Avatar";
 import ProfileForm from "./ProfileForm";
 
-const StyledProfile = styled.section`
-   background-color: ${({ theme }) => theme.colors.primary};
-   border-radius: 0 0 10px 10px;
-
-   width: 100%;
-   padding: 30px;
+const StyledProfile = styled(InsideContainer)`
+   padding-bottom: 30px;
 `;
 
 const CurrentInfo = styled.div`

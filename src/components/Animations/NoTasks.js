@@ -8,6 +8,7 @@ import NewTaskForm from "../TaskForms/NewTask";
 
 import styled from "styled-components";
 import { Button } from "@smooth-ui/core-sc";
+import { InsideContainer } from "../../styles/Container";
 
 const defaultOptions = {
    loop: true,
@@ -26,18 +27,14 @@ const FirstTaskButton = styled(Button)`
 
    position: relative;
 `;
-const Content = styled.section`
+const Content = styled(InsideContainer)`
    display: flex;
    flex-direction: column;
-   align-items: center;
    justify-content: center;
+   align-items: center;
 
    height: 70vh;
    padding-bottom: 7.5vh;
-
-   width: 100%;
-   border-radius: 0 0 10px 10px;
-   background: ${({ theme }) => theme.colors.background};
 
    h2 {
       text-align: center;

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import styled from "styled-components";
 import { Alert } from "@smooth-ui/core-sc";
+import { InsideContainer } from "../../styles/Container";
 
 import Controls from "./Controls";
 import TaskCard from "./TaskCard";
@@ -12,14 +13,7 @@ const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 const MAX_EPOCH_TIME = 9999999999999;
 
 // Style
-const TasksContainer = styled.div`
-   padding: 20px 30px;
-   width: 100%;
-
-   border-radius: 0 0 10px 10px;
-
-   background: ${({ theme }) => theme.colors.background};
-
+const TasksContainer = styled(InsideContainer)`
    h2 {
       font-size: 1.8rem;
       padding: 10px 0;
