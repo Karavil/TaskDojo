@@ -98,7 +98,7 @@ const NavBar = ({ loggedIn }) => {
          <NavContainer>
             <LogoLink to="/tasks">
                <h2>
-                  task<span>dojo</span>
+                  task<span>dōjō</span>
                </h2>
             </LogoLink>
             <UserProfile>
