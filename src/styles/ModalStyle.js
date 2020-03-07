@@ -8,7 +8,8 @@ const ModalStyle = {
       transform: "translate(-50%, -50%)",
       padding: 0,
       background: "none",
-      border: "none"
+      border: "none",
+      boxShadow: "0 3px 6px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.25)"
    }
 };
 
