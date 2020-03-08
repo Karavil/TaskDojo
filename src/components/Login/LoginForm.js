@@ -3,6 +3,8 @@ import React from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+
+import styled from "styled-components";
 import { Alert } from "@smooth-ui/core-sc";
 
 import axios from "axios";
@@ -65,6 +67,30 @@ const LoginForm = () => {
          });
    };
 
+   /**
+    * Demo Content
+    */
+   const demoSubmit = () => {
+      let random = "";
+      let nums = "0123456789abcABC";
+      for (let i = 0; i < 15; i++) {
+         random += nums[Math.floor(Math.random() * nums.length)];
+      }
+      console.log(random);
+      const data = {
+         email: random + "@demo.com",
+         password: random
+      };
+      alert(
+         `You are being logged in. Remember, you will lose all your tasks after logging out with a demo account. Please create a real account to access your tasks across other devices and browsers.`
+      );
+      onRegisterSubmit(data);
+   };
+
+   const DemoButton = styled(FormButton)`
+      margin: -5px 0 0;
+   `;
+
    // routerHistory
    const history = useHistory();
 
@@ -108,6 +134,9 @@ const LoginForm = () => {
                Register
             </FormButton>
          </ButtonBox>
+         <DemoButton variant="secondary" onClick={() => demoSubmit()}>
+            Try Demo
+         </DemoButton>
       </Form>
    );
 };

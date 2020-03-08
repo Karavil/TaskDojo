@@ -85,18 +85,6 @@ const Avatar = () => {
          });
    };
 
-   const changeAvatar = () => {
-      axiosWithAuth()
-         .put("/avatar")
-         .then(res => {
-            console.log("Changed Avatar :", res.data);
-            setAvatarURL(res.data);
-         })
-         .catch(err => {
-            console.log("Avatar change error:", err);
-         });
-   };
-
    const deleteAvatar = () => {
       axiosWithAuth()
          .delete("/avatar")
