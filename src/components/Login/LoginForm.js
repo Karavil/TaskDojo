@@ -88,7 +88,7 @@ const LoginForm = () => {
    };
 
    const DemoButton = styled(FormButton)`
-      margin: -5px 0 0;
+      margin-top: -5px;
    `;
 
    // routerHistory

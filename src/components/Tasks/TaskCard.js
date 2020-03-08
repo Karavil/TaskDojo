@@ -17,7 +17,7 @@ const StyledTaskCard = styled.div`
    justify-content: space-between;
    align-items: center;
 
-   opacity: ${props => (props.completed ? "0.3" : "1")};
+   opacity: ${props => (props.completed ? "0.5" : "1")};
 
    padding: 8px 20px;
    margin: 20px 0;

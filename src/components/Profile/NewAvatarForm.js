@@ -6,6 +6,7 @@ import { FaUserAstronaut } from "react-icons/fa";
 
 const StyledDropzone = styled.section`
    width: 40vw;
+   min-height: 30vh;
 
    background: ${({ theme }) => theme.colors.secondary};
 
@@ -44,17 +45,14 @@ function MyDropzone(props) {
    return (
       <StyledDropzone {...getRootProps()}>
          <input {...getInputProps()} />
-         {isDragActive ? (
-            <h2>Drop it here...</h2>
-         ) : (
-            <>
-               <h3>
-                  <b>Drop</b> your avatar here, or <b>click</b> to select an
-                  image file.
-               </h3>
-               <Icon />
-            </>
-         )}
+
+         <>
+            <h3>
+               <b>Drop</b> your avatar here, or <b>click</b> to select an image
+               file.
+            </h3>
+            <Icon />
+         </>
       </StyledDropzone>
    );
 }

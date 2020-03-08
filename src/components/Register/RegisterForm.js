@@ -40,7 +40,7 @@ const RegisterForm = props => {
          })
          .then(res => {
             console.log(res.data);
-            history.push("/login");
+            history.push("/auth");
             reset();
          })
          .catch(err => {

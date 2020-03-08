@@ -104,7 +104,7 @@ function App() {
                <ThemePicker setColorTheme={setColorTheme} />
             </Route>
 
-            <Route path="/login">
+            <Route path="/auth">
                <LoginForm />
             </Route>
 
