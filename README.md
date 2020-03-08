@@ -9,6 +9,7 @@ No matter how much is on your plate, taskdōjō makes it super easy to remember 
 This app was built with React connected to a PostgreSQL back-end server (hosted on Heroku). 
 
 ## Features
+![alt_text](https://i.imgur.com/oKTdHSR.png "Landing screen")
 
 ### Custom Themes
 ![alt text](https://i.imgur.com/SQdlcox.png "Custom Themes")
