@@ -51,9 +51,7 @@ const Tasks = () => {
             console.log("Failed getting user tasks:", err);
          })
          .then(() => {
-            setTimeout(() => {
-               setLoading(false);
-            }, 1200);
+            setLoading(false);
          });
    }, []);
 
